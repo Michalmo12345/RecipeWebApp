@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+        }
+        li {
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body>
+<h1>Menu</h1>
+<div>
+    <h2>Products</h2>
+    <ul>
+        <!-- Loop over the products and display them -->
+        <li th:each="product : ${products}" th:text="${product}"></li>
+    </ul>
+</div>
+<div>
+    <h2>Recipes</h2>
+    <ul>
+        <!-- Loop over the recipes and display them -->
+        <li th:each="recipe : ${recipes}" th:text="${recipe}"></li>
+    </ul>
+</div>
+</body>
+</html>
