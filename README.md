@@ -1,6 +1,6 @@
-# Gotuj z KLASĄ ;)
+## Gotuj z KLASĄ ;)
 
-## Dokumentacja wstępna projektu - PAP2024L-Z16
+### Dokumentacja wstępna projektu - PAP2024L-Z16
 
 ### Autorzy:
 - Michał Mokrzycki
