@@ -1,10 +1,7 @@
 package com.example.recipeapp.run;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -28,8 +25,26 @@ public class RecipeController {
         Optional <Recipe> recipe = recipeRepository.findById(id);
         if(recipe.isEmpty())
         {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe not found");
+            throw new RecipeNotFoundException();
         }
         return recipe.get();
     }
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("")
+    void create(@RequestBody Recipe recipe) {
+        recipeRepository.create(recipe);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/{id}")
+    void update(@RequestBody Recipe recipe, @PathVariable Integer id) {
+        recipeRepository.update(recipe, id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    void delete(@PathVariable Integer id) {
+        recipeRepository.delete(id);
+    }
+
 }

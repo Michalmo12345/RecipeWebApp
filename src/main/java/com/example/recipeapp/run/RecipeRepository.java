@@ -20,6 +20,22 @@ public class RecipeRepository {
                 .filter(recipe -> recipe.id() == id)
                         .findFirst();
     }
+
+    void create(Recipe recipe) {
+        recipes.add(recipe);
+    }
+
+    void update(Recipe recipe, Integer id) {
+        Optional<Recipe> existingRecipe = findById(id);
+        if(existingRecipe.isPresent())
+        {
+            recipes.set(recipes.indexOf(existingRecipe.get()), recipe);
+        }
+    }
+
+    void delete(Integer id) {
+        recipes.removeIf(recipe -> recipe.id().equals(id));
+    }
     @PostConstruct
     private void init(){
         recipes.add(new Recipe(1, "Pasta", "Pasta with tomato sauce", 500));

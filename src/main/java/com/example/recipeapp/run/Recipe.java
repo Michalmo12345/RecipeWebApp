@@ -8,3 +8,4 @@ public record Recipe (
     String description,
     Integer total_calories
     ) {}
+// can add validation later
