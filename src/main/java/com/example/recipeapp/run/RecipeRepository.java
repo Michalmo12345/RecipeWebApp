@@ -17,7 +17,7 @@ public class RecipeRepository {
     }
     Optional<Recipe> findById(Integer id) {
         return recipes.stream()
-                .filter(recipe -> recipe.id() == id)
+                .filter(recipe -> recipe.getId() == id)
                         .findFirst();
     }
 
@@ -34,11 +34,10 @@ public class RecipeRepository {
     }
 
     void delete(Integer id) {
-        recipes.removeIf(recipe -> recipe.id().equals(id));
+        recipes.removeIf(recipe -> recipe.getId().equals(id));
     }
     @PostConstruct
     private void init(){
-        recipes.add(new Recipe(1, "Pasta", "Pasta with tomato sauce", 500));
-        recipes.add(new Recipe(2, "Pizza", "Pizza with cheese",800));
+        recipes.add(new Recipe(1,"Spaghetti", "A simple pasta recipe", List.of("Italian", "Pasta"), "Cook the pasta", List.of(new Ingredient("Pasta", "200g"), new Ingredient("Tomato Sauce", "500g"))));
     }
 }
