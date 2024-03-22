@@ -6,11 +6,13 @@
     <link rel="stylesheet" href="/css/style.css"> <!-- Optional: Link to your CSS file for styling -->
 </head>
 <body>
-<h1 th:text="${message}">Recipe Application</h1>
-<div>
+<div class="container">
+    <h1 th:text="${message}">Recipe Application</h1>
+<div class="buttons">
     <button onclick="window.location.href='/add-recipe';">Add Recipe</button>
     <button onclick="window.location.href='/view-recipes';">View Recipes</button>
     <button onclick="window.location.href='/search-recipes';">Search Recipes</button>
+</div>
 </div>
 </body>
 </html>

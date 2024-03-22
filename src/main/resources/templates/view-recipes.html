@@ -13,6 +13,7 @@
         <tr>
             <th>Name</th>
             <th>Description</th>
+            <th>Ingredients</th>
         </tr>
         </thead>
         <tbody>
@@ -20,6 +21,16 @@
         <tr th:each="recipe : ${recipes}">
             <td th:text="${recipe.name}">Recipe Name</td>
             <td th:text="${recipe.description}">Recipe Description</td>
+            <!-- Ingredients Dropdown -->
+            <td>
+                <details>
+                    <summary>Ingredients</summary>
+                    <ul>
+                        <!-- Assume 'recipe.ingredients' is a list of ingredient names -->
+                        <li th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient}">Ingredient Name</li>
+                    </ul>
+                </details>
+            </td>
         </tr>
         </tbody>
     </table>
