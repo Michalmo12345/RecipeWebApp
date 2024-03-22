@@ -1,26 +1,29 @@
 package com.example.recipeapp;
 
-import com.example.recipeapp.run.Recipe;
+import com.example.recipeapp.recipe.Ingredient;
+import com.example.recipeapp.recipe.Recipe;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @SpringBootApplication
 public class RecipeAppApplication {
+
     private static final Logger log = LoggerFactory.getLogger(RecipeAppApplication.class);
     public static void main(String[] args) {
+
         SpringApplication.run(RecipeAppApplication.class, args);
     }
 
     @Bean
-    CommandLineRunner runner(){
+    CommandLineRunner runner() {
         return args -> {
-            Recipe recipe = new Recipe(1, "Pasta", "Pasta with tomato sauce",500);
-            log.info("Recipes: " + recipe);
+            Recipe recipe = new Recipe("Spaghetti", "A simple pasta recipe", List.of("Italian", "Pasta"), "Cook the pasta", List.of(new Ingredient("Pasta", "200g"), new Ingredient("Tomato Sauce", "500g")));
+            log.info(recipe.toString());
         };
     }
 }
