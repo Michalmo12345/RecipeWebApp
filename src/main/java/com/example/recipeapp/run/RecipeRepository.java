@@ -1,7 +1,10 @@
 package com.example.recipeapp.run;
 
 import jakarta.annotation.PostConstruct;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.jdbc.core.simple.JdbcClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,34 +13,48 @@ import java.util.Optional;
 @Repository
 public class RecipeRepository {
 
-    private List<Recipe> recipes = new ArrayList<>();
+    private static final Logger log = LoggerFactory.getLogger(RecipeRepository.class);
+    private final JdbcClient jdbcClient;
 
-    List<Recipe> findAll() {
-        return recipes;
-    }
-    Optional<Recipe> findById(Integer id) {
-        return recipes.stream()
-                .filter(recipe -> recipe.getId() == id)
-                        .findFirst();
+    public RecipeRepository(JdbcClient jdbcClient) {
+        this.jdbcClient = jdbcClient;
     }
 
-    void create(Recipe recipe) {
-        recipes.add(recipe);
+    public List<Recipe> findAll() {
+        return jdbcClient.sql("select * from Recipe")
+                .query(Recipe.class)
+                .list();
     }
 
-    void update(Recipe recipe, Integer id) {
-        Optional<Recipe> existingRecipe = findById(id);
-        if(existingRecipe.isPresent())
-        {
-            recipes.set(recipes.indexOf(existingRecipe.get()), recipe);
-        }
+    public Optional<Recipe> findById(Integer id) {
+        return jdbcClient.sql("select id,name from Recipe where id = :id")
+                .param(id)
+                .query(Recipe.class)
+                .optional();
     }
 
-    void delete(Integer id) {
-        recipes.removeIf(recipe -> recipe.getId().equals(id));
+    public void create(Recipe recipe) {
+        jdbcClient.sql("INSERT INTO Recipe(id, name) values (?, ?)")
+                .params(List.of(recipe.getId(), recipe.getName()))
+                .update();
     }
-    @PostConstruct
-    private void init(){
-        recipes.add(new Recipe(1,"Spaghetti", "A simple pasta recipe", List.of("Italian", "Pasta"), "Cook the pasta", List.of(new Ingredient("Pasta", "200g"), new Ingredient("Tomato Sauce", "500g"))));
+
+    public void update(Recipe recipe) {
+        jdbcClient.sql("update recipes set name = :name, description = :description where id = :id")
+                .params(List.of(recipe.getId(), recipe.getName()))
+                .update();
     }
+
+    public void delete(Integer id) {
+        var updated = jdbcClient.sql("delete from Recipe where id = :id")
+                .param(id)
+                .update();
+    }
+
+    public int count() { return jdbcClient.sql("select count(*) from recipe").query().listOfRows().size(); }
+
+    public void saveAll(List<Recipe> recipes) {
+        recipes.stream().forEach(this::create);
+    }
+
 }

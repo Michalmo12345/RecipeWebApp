@@ -2,6 +2,7 @@ package com.example.recipeapp;
 
 import com.example.recipeapp.run.Ingredient;
 import com.example.recipeapp.run.Recipe;
+import com.example.recipeapp.run.RecipeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -19,10 +20,11 @@ public class RecipeAppApplication {
     }
 
     @Bean
-    CommandLineRunner runner() {
+    CommandLineRunner runner(RecipeRepository recipeRepository) {
         return args -> {
             Recipe recipe = new Recipe(1,"Spaghetti", "A simple pasta recipe", List.of("Italian", "Pasta"), "Cook the pasta", List.of(new Ingredient("Pasta", "200g"), new Ingredient("Tomato Sauce", "500g")));
             log.info(recipe.toString());
+            recipeRepository.create(recipe);
         };
     }
 }

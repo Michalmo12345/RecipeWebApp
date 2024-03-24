@@ -51,7 +51,7 @@ public class HomeController {
         model.addAttribute("recipes", recipeRepository.findAll());
         return "view-recipes";
     }
-
+//TODO
 //    @GetMapping("/search-recipes")
 //    public String searchRecipes(Model model) {
 //        model.addAttribute("recipes", recipeRepository.findById());
