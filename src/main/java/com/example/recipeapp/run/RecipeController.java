@@ -1,50 +1,60 @@
-//package com.example.recipeapp.run;
-//
-//import org.springframework.http.HttpStatus;
-//import org.springframework.web.bind.annotation.*;
-//import org.springframework.web.server.ResponseStatusException;
-//
-//import java.util.List;
-//import java.util.Optional;
-//@RestController
-//@RequestMapping("/api/recipes")
-//public class RecipeController {
-//    private final RecipeRepository recipeRepository;
-//
-//    public RecipeController(RecipeRepository recipeRepository) {
-//        this.recipeRepository = recipeRepository;
+package com.example.recipeapp.run;
+
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+import java.util.Optional;
+
+@Controller
+public class RecipeController {
+    private final RecipeRepository recipeRepository;
+
+    public RecipeController(RecipeRepository recipeRepository) {
+        this.recipeRepository = recipeRepository;
+    }
+
+    @GetMapping("/api/recipes/{id}")
+    Recipe findById(@PathVariable Integer id){
+        Optional<Recipe> recipe = recipeRepository.findById(id);
+        if(recipe.isEmpty())
+        {
+            throw new RecipeNotFoundException();
+        }
+        return recipe.get();
+    }
+
+    @GetMapping("/")
+    public String home(Model model) {
+        model.addAttribute("message", "Witaj na stronie gotuj z KLASĄ");
+        return "index";
+    }
+
+//    @GetMapping("/add-recipe")
+//    public String addRecipe(Model model) {
+//        model.addAttribute("recipe", new Recipe());
+//        return "add-recipe";
+
+    @GetMapping("api/recipes")
+    @ResponseBody
+    List<Recipe> findAll() {
+        return recipeRepository.findAll();
+    }
+    @GetMapping("/view-recipes")
+    public String viewRecipes(Model model) {
+        model.addAttribute("recipes", recipeRepository.findAll());
+        return "view-recipes";
+    }
+//TODO
+//    @GetMapping("/search-recipes")
+//    public String searchRecipes(Model model) {
+//        model.addAttribute("recipes", recipeRepository.findById());
+//        return "search-recipes";
 //    }
-//
-//    @GetMapping("")
-//    List<Recipe> findAll() {
-//        return recipeRepository.findAll();
-//    }
-//
-//    @GetMapping("/{id}")
-//    Recipe findById(@PathVariable Integer id){
-//        Optional <Recipe> recipe = recipeRepository.findById(id);
-//        if(recipe.isEmpty())
-//        {
-//            throw new RecipeNotFoundException();
-//        }
-//        return recipe.get();
-//    }
-//    @ResponseStatus(HttpStatus.CREATED)
-//    @PostMapping("")
-//    void create(@RequestBody Recipe recipe) {
-//        recipeRepository.create(recipe);
-//    }
-//
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    @PutMapping("/{id}")
-//    void update(@RequestBody Recipe recipe, @PathVariable Integer id) {
-//        recipeRepository.update(recipe, id);
-//    }
-//
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    @DeleteMapping("/{id}")
-//    void delete(@PathVariable Integer id) {
-//        recipeRepository.delete(id);
-//    }
-//
-//}
+
+
+}
