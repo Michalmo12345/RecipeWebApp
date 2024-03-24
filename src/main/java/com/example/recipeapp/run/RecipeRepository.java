@@ -36,8 +36,8 @@ public class RecipeRepository {
     void delete(Integer id) {
         recipes.removeIf(recipe -> recipe.getId().equals(id));
     }
-    @PostConstruct
-    private void init(){
-        recipes.add(new Recipe(1,"Spaghetti", "A simple pasta recipe", List.of("Italian", "Pasta"), "Cook the pasta", List.of(new Ingredient("Pasta", "200g"), new Ingredient("Tomato Sauce", "500g"))));
-    }
+//    @PostConstruct
+//    private void init(){
+//        recipes.add(new Recipe(1,"Spaghetti", "A simple pasta recipe", List.of("Italian", "Pasta"), "Cook the pasta", List.of(new Ingredient("Pasta", "200g"), new Ingredient("Tomato Sauce", "500g"))));
+
 }
