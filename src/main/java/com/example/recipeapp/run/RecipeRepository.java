@@ -29,21 +29,21 @@ public class RecipeRepository {
     }
 
     public Optional<Recipe> findById(Integer id) {
-        return jdbcClient.sql("select id,name from Recipe where id = :id")
+        return jdbcClient.sql("select * from Recipe where id = :id")
                 .param(id)
                 .query(Recipe.class)
                 .optional();
     }
 
     public void create(Recipe recipe) {
-        jdbcClient.sql("INSERT INTO Recipe(id, name) values (?, ?)")
-                .params(List.of(recipe.getId(), recipe.getName()))
+        jdbcClient.sql("INSERT INTO Recipe(id, name, image, category, instructions, time, ingredients) values (?, ?, ?, ?, ?, ?, ?)")
+                .params(List.of(recipe.getId(), recipe.getName(), recipe.getImage(), recipe.getCategoryText(), recipe.getInstructions(), recipe.getTime(), recipe.getIngredientsText()))
                 .update();
     }
 
-    public void update(Recipe recipe) {
-        jdbcClient.sql("update Recipe set name = :name where id = :id")
-                .params(List.of(recipe.getId(), recipe.getName()))
+    public void update(Recipe recipe, Integer id) {
+        jdbcClient.sql("update Recipe set name = ?, image = ?, category = ?, instructions = ?, time = ?, ingredients = ? where id = ?")
+                .params(List.of(recipe.getName(), recipe.getImage(), recipe.getCategoryText(), recipe.getInstructions(), recipe.getTime(), recipe.getIngredientsText(), id))
                 .update();
     }
 
@@ -51,6 +51,10 @@ public class RecipeRepository {
         jdbcClient.sql("delete from recipe where id = :id")
                 .param("id", id)
                 .update();
+    }
+
+    public void drop() {
+        jdbcClient.sql("drop table recipe").update();
     }
 
     public int count() {

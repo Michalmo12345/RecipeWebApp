@@ -6,29 +6,26 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Recipe {
+
     public Integer id;
     private String name;
-    private String description;
+    private String image;
     private List<String> category;
     private String instructions;
+    private double time;
     private List<Ingredient> ingredients;
+
     public Recipe() {
     }
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Recipe(Integer id, String name, String description, List<String> category, String instructions, List<Ingredient> ingredients) {
+    public Recipe(Integer id, String name, String image, List<String> category, String instructions, double time, List<Ingredient> ingredients) {
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.image = image;
         this.category = category;
         this.instructions = instructions;
+        this.time = time;
         this.ingredients = ingredients;
     }
 
@@ -36,12 +33,12 @@ public class Recipe {
         return name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public List<String> getCategory() {
         return category;
+    }
+
+    public String getCategoryText() {
+        return String.join(", ", this.getCategory());
     }
 
     public String getInstructions() {
@@ -52,14 +49,31 @@ public class Recipe {
         return ingredients;
     }
 
+    public String getIngredientsText() {
+        return ingredients.stream().map( Ingredient::toString).collect(Collectors.joining(", "));
+    }
+
+    public int getTime() { return (int) time; }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getImage() { return image; }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String toString() {
         return "Recipe{" +
-                "id=" + id +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", category=" + category +
-                ", instructions='" + instructions + '\'' +
-                ", ingredients=" + ingredients.stream().map( Ingredient::toString).collect(Collectors.joining(", ")) +
+                "id=" + id + "\n" +
+                ", image='" + image + '\'' + "\n" +
+                ", name='" + name + '\'' + "\n" +
+                ", category=" + category + "\n" +
+                ", instructions='" + instructions + '\'' + "\n" +
+                ", ingredients=" + ingredients.stream().map( Ingredient::toString).collect(Collectors.joining(", ")) + "\n" +
+                ", time=" + time + "\n" +
                 '}';
     }
 }
