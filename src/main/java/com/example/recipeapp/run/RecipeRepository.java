@@ -5,10 +5,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.simple.JdbcClient;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 @Repository
 public class RecipeRepository {
@@ -40,21 +42,23 @@ public class RecipeRepository {
     }
 
     public void update(Recipe recipe) {
-        jdbcClient.sql("update recipes set name = :name, description = :description where id = :id")
+        jdbcClient.sql("update Recipe set name = :name where id = :id")
                 .params(List.of(recipe.getId(), recipe.getName()))
                 .update();
     }
 
     public void delete(Integer id) {
-        var updated = jdbcClient.sql("delete from Recipe where id = :id")
-                .param(id)
+        jdbcClient.sql("delete from recipe where id = :id")
+                .param("id", id)
                 .update();
     }
 
-    public int count() { return jdbcClient.sql("select count(*) from recipe").query().listOfRows().size(); }
+    public int count() {
+        return jdbcClient.sql("select count(*) from recipe").query().listOfRows().size();
+    }
 
     public void saveAll(List<Recipe> recipes) {
-        recipes.stream().forEach(this::create);
+        recipes.forEach(this::create);
     }
 
 }

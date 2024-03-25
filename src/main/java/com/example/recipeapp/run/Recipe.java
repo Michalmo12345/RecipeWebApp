@@ -6,14 +6,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Recipe {
-
     public Integer id;
     private String name;
     private String description;
     private List<String> category;
     private String instructions;
     private List<Ingredient> ingredients;
-
     public Recipe() {
     }
 

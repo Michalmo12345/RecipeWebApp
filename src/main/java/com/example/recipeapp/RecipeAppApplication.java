@@ -22,8 +22,9 @@ public class RecipeAppApplication {
     @Bean
     CommandLineRunner runner(RecipeRepository recipeRepository) {
         return args -> {
-            Recipe recipe = new Recipe(1,"Spaghetti", "A simple pasta recipe", List.of("Italian", "Pasta"), "Cook the pasta", List.of(new Ingredient("Pasta", "200g"), new Ingredient("Tomato Sauce", "500g")));
+            Recipe recipe = new Recipe(2,"Spaghetti", "A simple pasta recipe", List.of("Italian", "Pasta"), "Cook the pasta", List.of(new Ingredient("Pasta", "200g"), new Ingredient("Tomato Sauce", "500g")));
             log.info(recipe.toString());
+            recipeRepository.delete(2);
         };
     }
 }
