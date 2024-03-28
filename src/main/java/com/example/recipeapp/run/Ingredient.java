@@ -3,7 +3,6 @@ package com.example.recipeapp.run;
 import java.util.Map;
 
 public class Ingredient {
-    private Integer id;
     private String name;
     private String amount;
 
@@ -14,14 +13,13 @@ public class Ingredient {
     public Ingredient() {
     }
 
-    public Ingredient(Integer id, String name, String amount, Integer recipe_id) {
-        this.id = id;
+    public Ingredient(String name, String amount, Integer recipe_id) {
         this.name = name;
         this.amount = amount;
         this.recipe_id = recipe_id;
     }
 
-    public Integer getId(){return id;}
+
     public String getName() {
         return name;
     }
@@ -32,6 +30,22 @@ public class Ingredient {
     public Integer getRecipe_id(){return recipe_id;}
     public Map<String, Float> getNutrition() {
         return nutrition;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public void setRecipe_id(Integer recipe_id) {
+        this.recipe_id = recipe_id;
+    }
+
+    public void setNutrition(Map<String, Float> nutrition) {
+        this.nutrition = nutrition;
     }
 
     public String toString() {
