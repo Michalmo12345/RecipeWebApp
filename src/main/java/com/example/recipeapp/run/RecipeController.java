@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +19,7 @@ public class RecipeController {
         this.recipeRepository = recipeRepository;
     }
 
-    @GetMapping("/api/recipes/{id}")
+    @GetMapping("/recipe/{id}")
     Recipe findById(@PathVariable Integer id){
         Optional<Recipe> recipe = recipeRepository.findById(id);
         if(recipe.isEmpty())
@@ -49,12 +50,10 @@ public class RecipeController {
         model.addAttribute("recipes", recipeRepository.findAll());
         return "view-recipes";
     }
-//TODO
-//    @GetMapping("/search-recipes")
-//    public String searchRecipes(Model model) {
-//        model.addAttribute("recipes", recipeRepository.findById());
-//        return "search-recipes";
-//    }
 
+    @GetMapping("/search-recipes")
+    public String showSearchForm() {
+        return "search-recipes"; // Return the search-recipes.html template
+    }
 
 }

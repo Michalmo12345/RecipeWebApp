@@ -19,15 +19,15 @@
         <tbody>
         <!-- Loop through the recipes list -->
         <tr th:each="recipe : ${recipes}">
-            <td th:text="${recipe.name}">Recipe Name</td>
-            <td th:text="${recipe.description}">Recipe Description</td>
-            <!-- Ingredients Dropdown -->
+            <td th:text="${recipe.getName()}">Recipe Name</td>
+            <td th:text="${recipe.getInstructions()}">Recipe Description</td>
+             Ingredients Dropdown
             <td>
                 <details>
                     <summary>Ingredients</summary>
                     <ul>
                         <!-- Assume 'recipe.ingredients' is a list of ingredient names -->
-                        <li th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient}">Ingredient Name</li>
+                        <li th:each="ingredient : ${recipe.getIngredients()}" th:text="${ingredient}">Ingredient Name</li>
                     </ul>
                 </details>
             </td>
