@@ -65,6 +65,33 @@ public class Recipe {
         this.id = id;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setCategoryText(String category) {
+        this.category = List.of(category.split(", "));
+    }
+    public void setCategory(List<String> category) {
+        this.category = category;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
+
+    public void setTime(double time) {
+        this.time = time;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
     public String toString() {
         return "Recipe{" +
                 "id=" + id + "\n" +

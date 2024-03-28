@@ -3,6 +3,7 @@ package com.example.recipeapp.run;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.util.Assert;
@@ -22,9 +23,32 @@ public class RecipeRepository {
         this.jdbcClient = jdbcClient;
     }
 
+    public class RecipieRowMapper implements RowMapper<Recipe>{
+        @Override
+        public Recipe mapRow(java.sql.ResultSet rs, int rowNum) throws java.sql.SQLException {
+            Recipe recipe = new Recipe();
+            recipe.setId(rs.getInt("id"));
+            recipe.setName(rs.getString("name"));
+            recipe.setImage(rs.getString("image"));
+            recipe.setCategoryText(rs.getString("category"));
+            recipe.setInstructions(rs.getString("instructions"));
+            recipe.setTime(rs.getDouble("time"));
+            List<Ingredient> ingredients = new ArrayList<>();
+            do {
+                Ingredient ingredient = new Ingredient();
+                ingredient.setName(rs.getString("name"));
+                ingredient.setAmount(rs.getString("amount"));
+                ingredient.setRecipe_id(rs.getInt("recipe_id"));
+                ingredients.add(ingredient);
+            } while (rs.next());
+            recipe.setIngredients(ingredients);
+            return recipe;
+        }
+    }
+
     public List<Recipe> findAll() {
-        return jdbcClient.sql("select * from Recipe left join Ingredient on Recipe.id = Ingredient.recipe_id")
-                .query(Recipe.class)
+        return jdbcClient.sql("select Recipe.*, Ingredient.name, Ingredient.amount, Ingredient.recipe_id from Recipe INNER join Ingredient on Recipe.id = Ingredient.recipe_id")
+                .query(new RecipieRowMapper())
                 .list();
     }
 
@@ -36,8 +60,8 @@ public class RecipeRepository {
     }
 
     public void createIngredient(Ingredient ingredient) {
-        jdbcClient.sql("INSERT INTO Ingredient(id, name, amount, recipe_id) values (?,?,?,?)")
-                .params(List.of(ingredient.getId(), ingredient.getName(), ingredient.getAmount(), ingredient.getRecipe_id()))
+        jdbcClient.sql("INSERT INTO Ingredient(name, amount, recipe_id) values (?,?,?,?)")
+                .params(List.of(ingredient.getName(), ingredient.getAmount(), ingredient.getRecipe_id()))
                 .update();
     }
     public void create(Recipe recipe) {
