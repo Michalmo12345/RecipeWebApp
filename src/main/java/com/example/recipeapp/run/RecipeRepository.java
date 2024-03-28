@@ -23,7 +23,7 @@ public class RecipeRepository {
     }
 
     public List<Recipe> findAll() {
-        return jdbcClient.sql("select * from Recipe")
+        return jdbcClient.sql("select * from Recipe left join Ingredient on Recipe.id = Ingredient.recipe_id")
                 .query(Recipe.class)
                 .list();
     }

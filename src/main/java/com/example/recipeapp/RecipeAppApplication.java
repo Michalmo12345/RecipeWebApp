@@ -25,7 +25,11 @@ public class RecipeAppApplication {
             Recipe recipe = new Recipe(2,"Spaghetti", "io", List.of("Italian", "Pasta"), "inn",123, List.of(new Ingredient(1, "Pasta", "200g", 2), new Ingredient(2, "Tomato Sauce", "500g", 1)));
             log.info(recipe.toString());
 //            recipeRepository.drop();
-            recipeRepository.create(recipe);
+       //     recipeRepository.create(recipe);
+            List<Recipe> x = recipeRepository.findAll();
+            for (Recipe r : x) {
+                log.info(r.toString());
+            }
         };
     }
 }
