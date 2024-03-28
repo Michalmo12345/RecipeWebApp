@@ -35,15 +35,23 @@ public class RecipeRepository {
                 .optional();
     }
 
-    public void create(Recipe recipe) {
-        jdbcClient.sql("INSERT INTO Recipe(id, name, image, category, instructions, time, ingredients) values (?, ?, ?, ?, ?, ?, ?)")
-                .params(List.of(recipe.getId(), recipe.getName(), recipe.getImage(), recipe.getCategoryText(), recipe.getInstructions(), recipe.getTime(), recipe.getIngredientsText()))
+    public void createIngredient(Ingredient ingredient) {
+        jdbcClient.sql("INSERT INTO Ingredient(id, name, amount, recipe_id) values (?,?,?,?)")
+                .params(List.of(ingredient.getId(), ingredient.getName(), ingredient.getAmount(), ingredient.getRecipe_id()))
                 .update();
+    }
+    public void create(Recipe recipe) {
+        jdbcClient.sql("INSERT INTO Recipe(id, name, image, category, instructions, time) values (?, ?, ?, ?, ?, ?)")
+                .params(List.of(recipe.getId(), recipe.getName(), recipe.getImage(), recipe.getCategoryText(), recipe.getInstructions(), recipe.getTime()))
+                .update();
+        for (Ingredient ingredient : recipe.getIngredients()) {
+            this.createIngredient(ingredient);
+        }
     }
 
     public void update(Recipe recipe, Integer id) {
-        jdbcClient.sql("update Recipe set name = ?, image = ?, category = ?, instructions = ?, time = ?, ingredients = ? where id = ?")
-                .params(List.of(recipe.getName(), recipe.getImage(), recipe.getCategoryText(), recipe.getInstructions(), recipe.getTime(), recipe.getIngredientsText(), id))
+        jdbcClient.sql("update Recipe set name = ?, image = ?, category = ?, instructions = ?, time = ? where id = ?")
+                .params(List.of(recipe.getName(), recipe.getImage(), recipe.getCategoryText(), recipe.getInstructions(), recipe.getTime(), id))
                 .update();
     }
 
@@ -55,6 +63,7 @@ public class RecipeRepository {
 
     public void drop() {
         jdbcClient.sql("drop table recipe").update();
+        jdbcClient.sql("drop table ingredient").update();
     }
 
     public int count() {
