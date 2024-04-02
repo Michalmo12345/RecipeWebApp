@@ -1,4 +1,4 @@
-package com.example.recipeapp.run;
+package com.example.recipeapp.exceptions;
 
 
 import org.springframework.http.HttpStatus;

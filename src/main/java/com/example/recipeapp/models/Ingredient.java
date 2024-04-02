@@ -1,4 +1,4 @@
-package com.example.recipeapp.run;
+package com.example.recipeapp.models;
 
 import java.util.Map;
 
