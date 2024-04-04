@@ -5,7 +5,10 @@ import com.example.recipeapp.models.User;
 import com.example.recipeapp.repositories.UserRepository;
 import com.example.recipeapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
@@ -23,5 +26,15 @@ public class UserServiceImpl implements UserService {
         user.setEmail(registrationDto.getEmail());
         user.setPassword(registrationDto.getPassword());
         userRepository.save(user);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }

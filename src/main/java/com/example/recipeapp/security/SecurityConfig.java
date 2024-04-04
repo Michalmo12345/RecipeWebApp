@@ -9,30 +9,26 @@ import org.springframework.security.config.annotation.web.configurers.LogoutConf
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-//@Configuration
-//@EnableWebSecurity
-//public class SecurityConfig {
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-//        http
-//                .csrf(AbstractHttpConfigurer::disable)
-//                .authorizeHttpRequests(authorize -> authorize
-//                        .requestMatchers("/login", "/register", "/css/**").permitAll()
-//                        .anyRequest().authenticated()
-//                )
-//                .formLogin((FormLoginConfigurer<HttpSecurity> form) -> form
-//                        .loginPage("/login")
-//                        .loginProcessingUrl("/login")
-//                        .defaultSuccessUrl("/home", true)
-//                        .failureUrl("/login?error=true")
-//                        .permitAll()
-//                )
-//                .logout((LogoutConfigurer<HttpSecurity> logout) -> logout
-//                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                        .permitAll()
-//                );
-//
-//        return http.build();
-//
-//    }
-//}
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                // Disable CSRF for simplicity in this example, consider enabling it for production
+                .csrf().disable()
+                .authorizeHttpRequests(authz -> authz
+                        // Permit all access to the register page
+                        .requestMatchers("/register", "/css/**", "/js/**").permitAll()
+                        // Any other request must be authenticated
+                        .anyRequest().authenticated()
+                )
+                .formLogin(form -> form
+                        // Specify the login page URL, Spring Security will allow unauthenticated access
+                        .loginPage("/login")
+                        .permitAll() // Allow all users to access the login page
+                )
+                .logout(logout -> logout.permitAll()); // Allow all users to logout
+        return http.build();
+    }
+}
