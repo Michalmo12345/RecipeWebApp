@@ -1,22 +1,15 @@
-package com.example.recipeapp.models;
+package com.example.recipeapp.dto;
 
+import jakarta.validation.constraints.NotEmpty;
 
-import jakarta.persistence.*;
-import org.springframework.context.annotation.Primary;
-
-import java.util.List;
-
-@Entity
-@Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer id;
+public class RegistrationDto {
+    private Long id;
+    @NotEmpty
     private String username;
+    @NotEmpty
     private String email;
+    @NotEmpty
     private String password;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Recipe> recipes;
 
     public String getUsername() {
         return username;
