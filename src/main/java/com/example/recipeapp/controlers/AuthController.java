@@ -50,6 +50,6 @@ public class AuthController {
             return "register";
         }
         userService.saveUser(user);
-        return "redirect:/index?success";
+        return "redirect:/";
     }
 }

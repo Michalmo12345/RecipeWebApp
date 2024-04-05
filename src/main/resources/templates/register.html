@@ -8,7 +8,7 @@
 
 <h2>Registration Form</h2>
 
-<form action="#" th:action="@{/register}" th:object="${user}" method="post">
+<form action="#" th:action="@{/register/save}" th:object="${user}" method="post">
     <div>
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" th:value="*{email}" required />

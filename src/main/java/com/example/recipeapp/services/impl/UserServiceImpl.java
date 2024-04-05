@@ -4,7 +4,7 @@ import com.example.recipeapp.dto.RegistrationDto;
 import com.example.recipeapp.models.User;
 import com.example.recipeapp.repositories.UserRepository;
 import com.example.recipeapp.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -13,10 +13,13 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
 
+    private PasswordEncoder passwordEncoder;
 
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
 
-    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+
     }
 
     @Override
@@ -24,7 +27,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setUsername(registrationDto.getUsername());
         user.setEmail(registrationDto.getEmail());
-        user.setPassword(registrationDto.getPassword());
+        user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
         userRepository.save(user);
     }
 
@@ -37,4 +40,17 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+
+//    @Override
+//    public UserDetailsService userDetailsService(){
+//        return new UserDetailsService(){
+//            @Override
+//            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+//                return userRepository.findByUsername(username);
+//            }
+//        };
+//    }
+
+
 }
