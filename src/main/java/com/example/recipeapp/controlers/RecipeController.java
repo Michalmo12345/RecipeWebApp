@@ -1,19 +1,18 @@
 package com.example.recipeapp.controlers;
 
 
-import com.example.recipeapp.models.Recipe;
-import com.example.recipeapp.exceptions.RecipeNotFoundException;
+import com.example.recipeapp.services.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class RecipeController {
+    private RecipeService recipeService;
+
+    public RecipeController(RecipeService recipeService) {
+        this.recipeService = recipeService;
+    }
 //    private final RecipeRepository recipeRepository;
 //
 //    public RecipeController(RecipeRepository recipeRepository) {
@@ -30,11 +29,11 @@ public class RecipeController {
 //        return recipe.get();
 //    }
 //
-//    @GetMapping("/")
-//    public String home(Model model) {
-//        model.addAttribute("message", "Witaj na stronie gotuj z KLASĄ");
-//        return "index";
-//    }
+    @GetMapping("/")
+    public String home(Model model) {
+        model.addAttribute("message", "Witaj na stronie gotuj z KLASĄ");
+        return "index";
+    }
 //
 ////    @GetMapping("/add-recipe")
 ////    public String addRecipe(Model model) {

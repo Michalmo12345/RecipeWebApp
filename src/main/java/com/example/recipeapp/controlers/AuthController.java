@@ -2,10 +2,13 @@ package com.example.recipeapp.controlers;
 
 
 
+import com.example.recipeapp.RecipeAppApplication;
 import com.example.recipeapp.dto.RegistrationDto;
 import com.example.recipeapp.models.User;
 import com.example.recipeapp.services.UserService;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AuthController {
     private UserService userService;
+    private static final Logger log = LoggerFactory.getLogger(RecipeAppApplication.class);
 
     public AuthController(UserService userService) {
         this.userService = userService;
@@ -49,6 +53,7 @@ public class AuthController {
             model.addAttribute("user", user);
             return "register";
         }
+        log.info("Attempt to save user: " + user.getUsername() + " with email: " + user.getEmail() + " and password: " + user.getPassword());
         userService.saveUser(user);
         return "redirect:/";
     }
