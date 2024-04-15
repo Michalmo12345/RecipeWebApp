@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Recipes</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Link to your CSS file for styling -->
+</head>
+<!-- Check if the recipes list is not empty -->
+<div th:if="${not #lists.isEmpty(recipes)}">
+    <h2>Available Recipes</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Ingredients</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Loop through the recipes list -->
+        <tr th:each="recipe : ${recipes}">
+            <td th:text="${recipe.getName()}">Recipe Name</td>
+            <td th:text="${recipe.getInstructions()}">Recipe Description</td>
+             Ingredients Dropdown
+            <td>
+                <details>
+                    <summary>Ingredients</summary>
+                    <ul>
+                        <!-- Assume 'recipe.ingredients' is a list of ingredient names -->
+                        <li th:each="ingredient : ${recipe.getIngredients()}" th:text="${ingredient}">Ingredient Name</li>
+                    </ul>
+                </details>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Display a message if the recipes list is empty -->
+<div th:if="${#lists.isEmpty(recipes)}">
+    <p>No recipes available.</p>
+</div>
+<div>
+    <a href="/static">Back to Home</a>
+</div>
+</body>
+</html>

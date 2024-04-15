@@ -1,9 +1,8 @@
 package com.example.recipeapp;
 
-import com.example.recipeapp.api.IngredientApiHandler;
-import com.example.recipeapp.run.Ingredient;
-import com.example.recipeapp.run.Recipe;
-import com.example.recipeapp.api.RecipeApiHandler;
+import com.example.recipeapp.models.Ingredient;
+import com.example.recipeapp.models.Recipe;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -20,15 +19,17 @@ public class RecipeAppApplication {
         SpringApplication.run(RecipeAppApplication.class, args);
     }
 
-    @Bean
-    CommandLineRunner runner() {
-        return args -> {
-//            RecipeApiHandler recipeApiHandler = new RecipeApiHandler();
-//            String recipeInfo = recipeApiHandler.getRecipes("chicken").toString();
-//            log.info(recipeInfo);
-            IngredientApiHandler ingredientApiHandler = new IngredientApiHandler();
-            String ingredientInfo = ingredientApiHandler.getIngredients("chicken").toString();
-            log.info(ingredientInfo);
-        };
-    }
+//    @Bean
+//    CommandLineRunner runner(RecipeRepository recipeRepository) {
+//        return args -> {
+//            Recipe recipe = new Recipe(2,"Spaghetti", "io", List.of("Italian", "Pasta"), "inn",123, List.of(new Ingredient("Pasta", "200g", 2), new Ingredient("Tomato Sauce", "500g", 1)));
+//            log.info(recipe.toString());
+////            recipeRepository.drop();
+//       //     recipeRepository.create(recipe);
+//            List<Recipe> x = recipeRepository.findAll();
+//            for (Recipe r : x) {
+//                log.info(r.toString());
+//            }
+//        };
+//    }
 }
