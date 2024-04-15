@@ -1,5 +1,6 @@
 package com.example.recipeapp;
 
+import com.example.recipeapp.api.IngredientApiHandler;
 import com.example.recipeapp.run.Ingredient;
 import com.example.recipeapp.run.Recipe;
 import com.example.recipeapp.api.RecipeApiHandler;
@@ -22,9 +23,12 @@ public class RecipeAppApplication {
     @Bean
     CommandLineRunner runner() {
         return args -> {
-            RecipeApiHandler recipeApiHandler = new RecipeApiHandler();
-            String recipeInfo = recipeApiHandler.getRecipes("chicken").toString();
-            log.info(recipeInfo);
+//            RecipeApiHandler recipeApiHandler = new RecipeApiHandler();
+//            String recipeInfo = recipeApiHandler.getRecipes("chicken").toString();
+//            log.info(recipeInfo);
+            IngredientApiHandler ingredientApiHandler = new IngredientApiHandler();
+            String ingredientInfo = ingredientApiHandler.getIngredients("chicken").toString();
+            log.info(ingredientInfo);
         };
     }
 }

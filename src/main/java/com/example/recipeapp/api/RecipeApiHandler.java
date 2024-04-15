@@ -18,20 +18,9 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-public class RecipeApiHandler {
-    private final JSONParser parser = new JSONParser();
-    private final JSONObject jsonObject;
-    {
-        try {
-            jsonObject = (JSONObject) parser.parse(new FileReader("APIKey.json"));
-        } catch (IOException | ParseException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
-
-    private final String userId = (String) jsonObject.get("apiID");
-    private final String apiKey = (String) jsonObject.get("apiKey");
+public class RecipeApiHandler extends ApiHandler{
+    private final String userId = getUserId("recipe");
+    private final String apiKey = getApiKey("recipe");
     private final String baseUrl = "https://api.edamam.com/api/recipes/v2?type=public&q=%s&app_id=%s&app_key=%s&field=label&field=image&field=url&field=ingredientLines&field=ingredients&field=calories&field=totalTime&field=cuisineType&field=totalNutrients";
 
     public List<Recipe> getRecipes(String query) {
@@ -71,13 +60,13 @@ public class RecipeApiHandler {
             return recipes;
 
     } catch (ProtocolException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Invalid request method");
         } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Invalid URL");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error connecting to API");
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error parsing response");
         }
     }
 }
