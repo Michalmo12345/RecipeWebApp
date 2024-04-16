@@ -1,6 +1,7 @@
 package com.example.recipeapp.controlers;
 
 
+import com.example.recipeapp.models.Recipe;
 import com.example.recipeapp.services.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,10 +36,11 @@ public class RecipeController {
         return "index";
     }
 //
-////    @GetMapping("/add-recipe")
-////    public String addRecipe(Model model) {
-////        model.addAttribute("recipe", new Recipe());
-////        return "add-recipe";
+    @GetMapping("/add-recipe")
+    public String addRecipe(Model model) {
+        model.addAttribute("recipe", new Recipe());
+        return "add-recipe";
+    }
 //
 //    @GetMapping("api/recipes")
 //    @ResponseBody

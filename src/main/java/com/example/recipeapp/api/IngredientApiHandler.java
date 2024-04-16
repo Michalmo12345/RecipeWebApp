@@ -1,6 +1,6 @@
 package com.example.recipeapp.api;
 
-import com.example.recipeapp.run.Ingredient;
+import com.example.recipeapp.models.Ingredient;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

@@ -1,6 +1,5 @@
 package com.example.recipeapp.models;
 
-import com.example.recipeapp.run.Ingredient;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -15,16 +14,21 @@ public class Recipe {
     public Integer id;
     private String name;
     private String image;
-    private List<String> category;
+    private String category;
     private String instructions;
     private double time;
-    private List<com.example.recipeapp.run.Ingredient> ingredients;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ingredient> ingredients;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id",nullable = false)
+    private User user;
 
     public Recipe() {
     }
 
 
-    public Recipe(Integer id, String image, String name, List<String> category, String instructions, double time, List<com.example.recipeapp.run.Ingredient> ingredients) {
+    public Recipe(Integer id, String image, String name, String category, String instructions, double time, List<Ingredient> ingredients) {
         this.id = id;
         this.image = image;
         this.name = name;
@@ -38,17 +42,17 @@ public class Recipe {
         return name;
     }
 
-    public List<String> getCategory() {
-        return category;
-    }
+//    public List<String> getCategory() {
+//        return category;
+//    }
 
     public String getInstructions() {
         return instructions;
     }
 
-    public List<com.example.recipeapp.run.Ingredient> getIngredients() {
-        return ingredients;
-    }
+//    public List<Ingredient> getIngredients() {
+//        return ingredients;
+//    }
 
     public double getTime() {
         return time;
@@ -71,9 +75,9 @@ public class Recipe {
                 "id=" + id + "\n" +
                 ", image='" + image + '\'' + "\n" +
                 ", name='" + name + '\'' + "\n" +
-                ", category=" + category + "\n" +
+//                ", category=" + category + "\n" +
                 ", instructions='" + instructions + '\'' + "\n" +
-                ", ingredients=" + ingredients.stream().map(Ingredient::toString).collect(Collectors.joining(", ")) + "\n" +
+//                ", ingredients=" + ingredients.stream().map(Ingredient::toString).collect(Collectors.joining(", ")) + "\n" +
                 ", time=" + time + "\n" +
                 '}';
     }
