@@ -1,7 +1,7 @@
 package com.example.recipeapp.api;
 
-import com.example.recipeapp.run.Recipe;
-import com.example.recipeapp.run.Ingredient;
+import com.example.recipeapp.models.Ingredient;
+import com.example.recipeapp.models.Recipe;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -48,7 +48,7 @@ public class RecipeApiHandler extends ApiHandler{
                 JSONObject recipe = (JSONObject) recipeObj.get("recipe");
                 String name = (String) recipe.get("label");
                 String image = (String) recipe.get("image");
-                List<String> category = (List<String>) recipe.get("cuisineType");
+                String category = recipe.get("cuisineType").toString();
                 String instructions = (String) recipe.get("url");
                 double time = (double) recipe.get("totalTime");
 //                TODO: Make proper cast to List<Ingredient>
