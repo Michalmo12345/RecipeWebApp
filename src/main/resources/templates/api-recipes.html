@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+</head>
+<body>
+<h1>Recipe Search Results</h1>
+<div>
+    <ul>
+        <li th:each="recipe : ${recipes}" th:text="${recipe.name}">Sample Recipe</li>
+    </ul>
+</div>
+<a href="/search-recipes.html">New Search</a>
+</body>
+</html>
