@@ -6,11 +6,22 @@
 </head>
 <body>
 <h1>Recipe Search Results</h1>
+<form th:action="@{/search-recipes}" method="GET">
+    <input type="text" name="query" placeholder="Type recipe name">
+    <input type="submit" value="Search">
+</form>
 <div>
     <ul>
-        <li th:each="recipe : ${recipes}" th:text="${recipe.name}">Sample Recipe</li>
+<!--        <li th:each="recipe : ${recipes}" th:text="${recipe.name}" >Sample Recipe</li>-->
+        <li th:each="recipe : ${recipes}">
+            <div>
+                Recipe name: <span th:text="${recipe.getName()}"></span>
+                Preparation time: <span th:text="${recipe.getTime()}"></span>
+                Instructions: <span th:text="${recipe.getInstructions()}"></span>
+                Category: <span th:text="${recipe.getCategory()}"></span>
+            </div>
+        </li>
     </ul>
 </div>
-<a href="/search-recipes.html">New Search</a>
 </body>
 </html>

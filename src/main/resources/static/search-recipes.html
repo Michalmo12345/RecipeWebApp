@@ -24,18 +24,6 @@
 <ul>
 
 </ul>
-<script>
-    fetch("https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=dbdbcd71&app_key=b94abbcf16a56daeefdecdc299d07790&field=label&field=image&field=url&field=ingredientLines&field=ingredients&field=calories&field=totalTime&field=cuisineType&field=totalNutrients")
-        .then(res => {
-            return res.json();
-        })
-        .then(data => {
-            data.forEach(recipe => {
-                const markup = '<li>${recipe.label}</li>';
 
-                document.querySelector('ul').insertAdjacentHTML('beforeend', markup);
-            });
-        })
-</script>
 </body>
 </html>

@@ -62,6 +62,8 @@ public class Recipe {
         return id;
     }
 
+    public String getCategory() {return category;}
+
     public String getImage() {
         return image;
     }

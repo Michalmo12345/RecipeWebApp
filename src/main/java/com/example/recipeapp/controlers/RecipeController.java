@@ -14,10 +14,11 @@ import java.util.List;
 @Controller
 public class RecipeController {
     private RecipeService recipeService;
-    private RecipeApiHandler recipeApiHandler;
+    private final RecipeApiHandler recipeApiHandler;
 
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
+        this.recipeApiHandler = new RecipeApiHandler();
     }
 
     @GetMapping("/")
