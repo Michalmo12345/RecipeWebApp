@@ -3,7 +3,6 @@ package com.example.recipeapp.models;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "recipes")
@@ -24,10 +23,12 @@ public class Recipe {
     @JoinColumn(name = "user_id",nullable = false)
     private User user;
 
-    public Recipe() {
+//    public Recipe() {
+//    }
+
+    public void setCreator(User user){
+        this.user = user;
     }
-
-
     public Recipe(Integer id, String image, String name, String category, String instructions, double time, List<Ingredient> ingredients) {
         this.id = id;
         this.image = image;
@@ -42,17 +43,11 @@ public class Recipe {
         return name;
     }
 
-//    public List<String> getCategory() {
-//        return category;
-//    }
 
     public String getInstructions() {
         return instructions;
     }
 
-//    public List<Ingredient> getIngredients() {
-//        return ingredients;
-//    }
 
     public double getTime() {
         return time;
