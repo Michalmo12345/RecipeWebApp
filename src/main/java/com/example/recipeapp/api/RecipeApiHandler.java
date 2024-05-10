@@ -50,7 +50,8 @@ public class RecipeApiHandler extends ApiHandler{
                 String image = (String) recipe.get("image");
                 String category = ((ArrayList<?>) recipe.get("cuisineType")).get(0).toString();
                 String instructions = (String) recipe.get("url");
-                double time = (double) recipe.get("totalTime");
+                Double time_d = (Double) recipe.get("totalTime");
+                int time = time_d.intValue();
 //                TODO: Make proper cast to List<Ingredient>
 //                JSONArray ingredients = (JSONArray) recipe.get("ingredients");
 //                List<Ingredient> ingredientList = new ObjectMapper().readValue(ingredients.toJSONString(), List.class);

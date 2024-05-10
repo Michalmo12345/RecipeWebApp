@@ -15,7 +15,7 @@ public class Recipe {
     private String image;
     private String category;
     private String instructions;
-    private double time;
+    private int time;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ingredient> ingredients;
 
@@ -23,13 +23,15 @@ public class Recipe {
     @JoinColumn(name = "user_id",nullable = false)
     private User user;
 
+    public Recipe() {}
+
 //    public Recipe() {
 //    }
 
     public void setCreator(User user){
         this.user = user;
     }
-    public Recipe(Integer id, String image, String name, String category, String instructions, double time, List<Ingredient> ingredients) {
+    public Recipe(Integer id, String image, String name, String category, String instructions, int time, List<Ingredient> ingredients) {
         this.id = id;
         this.image = image;
         this.name = name;
@@ -49,7 +51,7 @@ public class Recipe {
     }
 
 
-    public double getTime() {
+    public int getTime() {
         return time;
     }
 
