@@ -4,6 +4,7 @@ package com.example.recipeapp.controlers;
 import com.example.recipeapp.api.RecipeApiHandler;
 import com.example.recipeapp.models.Ingredient;
 import com.example.recipeapp.models.Recipe;
+import com.example.recipeapp.repositories.RecipeRepository;
 import com.example.recipeapp.services.RecipeService;
 import com.example.recipeapp.services.UserService;
 import jakarta.validation.Valid;
@@ -51,18 +52,9 @@ public class RecipeController {
     }
 
     @PostMapping("/add-recipe")
-    public String addRecipe(@RequestBody Recipe recipe, Model model) {
-//        List<Ingredient> ingr = new ArrayList<>();
-//        Recipe recipeTest = new Recipe(999, "blabla", "spaghetti", "italy", "blabla", 30, ingr);
-//        int id = recipe.getId();
-//        String image = recipe.getImage();
-//        String name = recipe.getName();
-//        String category = recipe.getCategory();
-//        String instructions = recipe.getInstructions();
-//        int time = recipe.getTime();
-//        List<Ingredient> ingredients = new ArrayList<>();
-//        Recipe recipeObj = new Recipe(id, image, name, category, instructions, time, ingredients);
+    public String addRecipe(@RequestParam("recipe") String recipeString) {
+        Recipe recipe = recipeApiHandler.convertFromString(recipeString);
         recipeService.saveRecipe(recipe);
-        return "api-recipes";
+        return "redirect:/search-recipes";
     }
 }

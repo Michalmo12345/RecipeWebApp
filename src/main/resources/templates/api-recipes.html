@@ -21,6 +21,7 @@
                 Category: <span th:text="${recipe.getCategory()}"></span>
                 <form th:action="@{/add-recipe}" method="POST">
                     <input type="submit" value="Favorite">
+                    <input type="hidden" name="recipe" th:value="${recipe}">
                 </form>
             </div>
         </li>

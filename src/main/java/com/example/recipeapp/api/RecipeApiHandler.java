@@ -47,7 +47,6 @@ public class RecipeApiHandler extends ApiHandler{
                 JSONObject recipeObj = (JSONObject) hits.get(i);
                 JSONObject recipe = (JSONObject) recipeObj.get("recipe");
                 String name = (String) recipe.get("label");
-                String image = (String) recipe.get("image");
                 String category = ((ArrayList<?>) recipe.get("cuisineType")).get(0).toString();
                 String instructions = (String) recipe.get("url");
                 Double time_d = (Double) recipe.get("totalTime");
@@ -56,7 +55,7 @@ public class RecipeApiHandler extends ApiHandler{
 //                JSONArray ingredients = (JSONArray) recipe.get("ingredients");
 //                List<Ingredient> ingredientList = new ObjectMapper().readValue(ingredients.toJSONString(), List.class);
                 List<Ingredient> ingredients = new ArrayList<>();
-                recipes.add(new Recipe(i, image, name, category, instructions, time, ingredients));
+                recipes.add(new Recipe(i, name, category, instructions, time, ingredients));
             }
             return recipes;
 
@@ -69,5 +68,17 @@ public class RecipeApiHandler extends ApiHandler{
         } catch (ParseException e) {
             throw new RuntimeException("Error parsing response");
         }
+    }
+    public Recipe convertFromString(String recipeString) {
+        String[] parts = recipeString.split(",");
+        Integer id = Integer.parseInt(parts[0]);
+        String name = parts[1];
+        String category = parts[2];
+        String instructions = parts[3];
+        int time = Integer.parseInt(parts[4]);
+
+
+        return new Recipe(id, name, category, instructions, time, new ArrayList<>());
+
     }
 }

@@ -12,7 +12,6 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
     private String name;
-    private String image;
     private String category;
     private String instructions;
     private int time;
@@ -31,9 +30,8 @@ public class Recipe {
     public void setCreator(User user){
         this.user = user;
     }
-    public Recipe(Integer id, String image, String name, String category, String instructions, int time, List<Ingredient> ingredients) {
+    public Recipe(Integer id, String name, String category, String instructions, int time, List<Ingredient> ingredients) {
         this.id = id;
-        this.image = image;
         this.name = name;
         this.category = category;
         this.instructions = instructions;
@@ -61,23 +59,16 @@ public class Recipe {
 
     public String getCategory() {return category;}
 
-    public String getImage() {
-        return image;
-    }
-
     public void setId(Integer id) {
         this.id = id;
     }
 
     public String toString() {
-        return "Recipe{" +
-                "id=" + id + "\n" +
-                ", image='" + image + '\'' + "\n" +
-                ", name='" + name + '\'' + "\n" +
-//                ", category=" + category + "\n" +
-                ", instructions='" + instructions + '\'' + "\n" +
+        return id + "," +
+                name + "," +
+                category + "," +
+                instructions + "," +
 //                ", ingredients=" + ingredients.stream().map(Ingredient::toString).collect(Collectors.joining(", ")) + "\n" +
-                ", time=" + time + "\n" +
-                '}';
+                time;
     }
 }
