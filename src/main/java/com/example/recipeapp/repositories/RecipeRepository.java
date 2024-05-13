@@ -18,5 +18,6 @@ import java.util.Optional;
 public interface RecipeRepository extends JpaRepository<Recipe, Integer>{
 
     Recipe findByName(String name);
+    List<Recipe> findByUserUsername(String username);
     // Recipe findById(Integer id);
 }

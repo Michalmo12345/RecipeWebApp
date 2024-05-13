@@ -19,6 +19,6 @@ import java.util.List;
 //    }
 //}
 public interface RecipeService {
-    List<Recipe> findAllRecipes();
+    List<Recipe> findAllUserRecipes(String username);
     void saveRecipe(Recipe recipe);
 }

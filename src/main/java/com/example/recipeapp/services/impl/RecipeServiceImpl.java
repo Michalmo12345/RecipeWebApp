@@ -20,8 +20,8 @@ public class RecipeServiceImpl implements RecipeService {
         this.userRepository = userRepository;
     }
 
-    public List<Recipe> findAllRecipes(){
-        return recipeRepository.findAll();
+    public List<Recipe> findAllUserRecipes(String username){
+        return recipeRepository.findByUserUsername(username);
     }
     public void saveRecipe(Recipe recipe){
         String username = SecurityUtil.getSessionUser();

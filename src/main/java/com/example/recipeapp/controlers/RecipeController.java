@@ -5,6 +5,7 @@ import com.example.recipeapp.api.RecipeApiHandler;
 import com.example.recipeapp.models.Ingredient;
 import com.example.recipeapp.models.Recipe;
 import com.example.recipeapp.repositories.RecipeRepository;
+import com.example.recipeapp.security.SecurityUtil;
 import com.example.recipeapp.services.RecipeService;
 import com.example.recipeapp.services.UserService;
 import com.example.recipeapp.models.User;
@@ -38,8 +39,8 @@ public class RecipeController {
     @GetMapping("/view-recipes")
     public String viewRecipes(Model model) {
 
-//        User user = new User();
-        List<Recipe> recipes = recipeService.findAllRecipes();
+        String username = SecurityUtil.getSessionUser();
+        List<Recipe> recipes = recipeService.findAllUserRecipes(username);
         model.addAttribute("recipes", recipes);
         return "view-recipes";
     }
