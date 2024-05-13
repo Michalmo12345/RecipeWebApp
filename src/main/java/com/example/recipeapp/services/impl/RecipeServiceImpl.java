@@ -30,4 +30,8 @@ public class RecipeServiceImpl implements RecipeService {
         recipeRepository.save(recipe);
     }
 
+    public void deleteRecipe(Integer id){
+        recipeRepository.deleteById(id);
+    }
+
 }

@@ -17,15 +17,7 @@ public class RecipeAppApplication {
     private static final Logger log = LoggerFactory.getLogger(RecipeAppApplication.class);
 
     public static void main(String[] args) {
-
         SpringApplication.run(RecipeAppApplication.class, args);
     }
-
-//    @Bean
-//    CommandLineRunner reciper(RecipeRepository recipeRepository) {
-//        return args -> {
-//            Recipe recipe = new Re
-//        };
-//    }
 
 }

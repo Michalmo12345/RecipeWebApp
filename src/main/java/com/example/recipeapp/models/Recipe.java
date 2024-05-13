@@ -23,10 +23,6 @@ public class Recipe {
     private User user;
 
     public Recipe() {}
-
-//    public Recipe() {
-//    }
-
     public void setCreator(User user){
         this.user = user;
     }
