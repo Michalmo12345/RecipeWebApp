@@ -64,6 +64,13 @@ public class RecipeController {
         return "redirect:/search-recipes";
     }
 
+    @GetMapping("/add-own-recipe")
+    public String addOwnRecipe(@RequestParam("recipe") String recipeString) {
+        Recipe recipe = recipeApiHandler.convertFromString(recipeString);
+        recipeService.saveRecipe(recipe);
+        return "add-own-recipe";
+    }
+
     @PostMapping("/view-recipe/{recipeId}/delete")
     public String deleteRecipe(@PathVariable Integer recipeId) {
         recipeService.deleteRecipe(recipeId);
