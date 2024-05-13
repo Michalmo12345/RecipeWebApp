@@ -2,10 +2,8 @@ package com.example.recipeapp.services;
 
 
 import com.example.recipeapp.models.Recipe;
-import com.example.recipeapp.models.User;
-import com.example.recipeapp.repositories.RecipeRepository;
-import com.example.recipeapp.repositories.UserRepository;
-import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 //@Service
 //public class RecipeService {
@@ -21,5 +19,6 @@ import org.springframework.stereotype.Service;
 //    }
 //}
 public interface RecipeService {
+    List<Recipe> findAllRecipes();
     void saveRecipe(Recipe recipe);
 }

@@ -7,6 +7,7 @@ import com.example.recipeapp.models.Recipe;
 import com.example.recipeapp.repositories.RecipeRepository;
 import com.example.recipeapp.services.RecipeService;
 import com.example.recipeapp.services.UserService;
+import com.example.recipeapp.models.User;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,10 @@ public class RecipeController {
 
     @GetMapping("/view-recipes")
     public String viewRecipes(Model model) {
+
+//        User user = new User();
+        List<Recipe> recipes = recipeService.findAllRecipes();
+        model.addAttribute("recipes", recipes);
         return "view-recipes";
     }
 

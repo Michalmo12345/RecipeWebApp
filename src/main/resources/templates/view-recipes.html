@@ -21,16 +21,16 @@
         <tr th:each="recipe : ${recipes}">
             <td th:text="${recipe.getName()}">Recipe Name</td>
             <td th:text="${recipe.getInstructions()}">Recipe Description</td>
-             Ingredients Dropdown
-            <td>
-                <details>
-                    <summary>Ingredients</summary>
-                    <ul>
-                        <!-- Assume 'recipe.ingredients' is a list of ingredient names -->
-                        <li th:each="ingredient : ${recipe.getIngredients()}" th:text="${ingredient}">Ingredient Name</li>
-                    </ul>
-                </details>
-            </td>
+<!--             Ingredients Dropdown-->
+<!--            <td>-->
+<!--                <details>-->
+<!--                    <summary>Ingredients</summary>-->
+<!--                    <ul>-->
+<!--                        &lt;!&ndash; Assume 'recipe.ingredients' is a list of ingredient names &ndash;&gt;-->
+<!--                        <li th:each="ingredient : ${recipe.getIngredients()}" th:text="${ingredient}">Ingredient Name</li>-->
+<!--                    </ul>-->
+<!--                </details>-->
+<!--            </td>-->
         </tr>
         </tbody>
     </table>

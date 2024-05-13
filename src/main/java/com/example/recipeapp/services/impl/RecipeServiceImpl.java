@@ -8,6 +8,8 @@ import com.example.recipeapp.security.SecurityUtil;
 import com.example.recipeapp.services.RecipeService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
@@ -16,6 +18,10 @@ public class RecipeServiceImpl implements RecipeService {
     public RecipeServiceImpl(RecipeRepository recipeRepository, UserRepository userRepository) {
         this.recipeRepository = recipeRepository;
         this.userRepository = userRepository;
+    }
+
+    public List<Recipe> findAllRecipes(){
+        return recipeRepository.findAll();
     }
     public void saveRecipe(Recipe recipe){
         String username = SecurityUtil.getSessionUser();
