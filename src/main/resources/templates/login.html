@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Login Page</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Link to your CSS file for styling -->
 </head>
-<body style="background-image: url('/images/recipeBackground.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+<body>
 <div class="container">
     <div th:if="${param.error}">
         Invalid username and password.
@@ -11,6 +12,7 @@
     <div th:if="${param.logout}">
         You have been logged out.
     </div>
+    <h2>Login</h2> <!-- New heading -->
     <form th:action="@{/login}" method="post">
         <div><label> Username: <input type="text" name="username"/> </label></div>
         <div><label> Password: <input type="password" name="password"/> </label></div>

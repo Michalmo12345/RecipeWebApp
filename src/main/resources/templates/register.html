@@ -1,29 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Registration Form</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Link to your CSS file for styling -->
 </head>
 <body>
-
-<h2>Registration Form</h2>
-
-<form action="#" th:action="@{/register/save}" th:object="${user}" method="post">
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" th:value="*{email}" required />
-    </div>
-    <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" th:value="*{username}" required />
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" th:value="*{password}" required />
-    </div>
-    <div>
-        <button type="submit">Register</button>
-    </div>
-</form>
+<div class="container">
+    <h2>Register</h2>
+    <form th:action="@{/register/save}" th:object="${user}" method="post">
+        <div><label> E-mail: <input type="email" name="email" th:value="*{email}" required /></label></div>
+        <div><label> Username: <input type="text" name="username" th:value="*{username}" required /></label></div>
+        <div><label> Password: <input type="password" name="password" th:value="*{password}" required /></label></div>
+        <div><input type="submit" value="Register"/></div>
+    </form>
+    <div>If you already have an account, <a href="/login">click here</a> to log in.</div>
+</div>
 </body>
 </html>
