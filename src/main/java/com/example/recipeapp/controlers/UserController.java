@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class UserController {
 
 
-    @Autowired
-    private UserRepository userRepository;
 
+    private final UserRepository userRepository;
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
     @GetMapping("/user/profile")
     public String userProfile(Model model) {
         // Dodac logikę sprawdzania, czy użytkownik jest zalogowany

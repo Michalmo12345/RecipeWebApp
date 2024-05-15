@@ -17,6 +17,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Recipe> recipes;
 
+    public int getRecipeCount() {
+        return recipes.size();
+    }
     public String getUsername() {
         return username;
     }
