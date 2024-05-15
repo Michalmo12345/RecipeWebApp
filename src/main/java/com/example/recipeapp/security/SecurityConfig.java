@@ -27,7 +27,6 @@ import org.springframework.security.authentication.AuthenticationProvider;
 public class SecurityConfig {
 
     private CustomUserDetailsService userDetailsService;
-
     public SecurityConfig(CustomUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
@@ -51,14 +50,9 @@ public class SecurityConfig {
                         .failureUrl("/login?error=true")
                         .permitAll()
                 );
-//                .logout(logout -> logout
-//                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                        .permitAll()
-//                );
         return http.build();
     }
     public void configure(AuthenticationManagerBuilder builder) throws Exception {
         builder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
-
 }

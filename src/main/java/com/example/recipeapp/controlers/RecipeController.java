@@ -63,4 +63,10 @@ public class RecipeController {
         recipeService.saveRecipe(recipe);
         return "redirect:/search-recipes";
     }
+
+    @PostMapping("/view-recipe/{recipeId}/delete")
+    public String deleteRecipe(@PathVariable Integer recipeId) {
+        recipeService.deleteRecipe(recipeId);
+        return "redirect:/view-recipes";
+    }
 }
