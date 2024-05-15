@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Recipe</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Link to your CSS file for styling -->
+</head>
+<body>
+<div>
+    <h2>Add a New Recipe</h2>
+    <form th:action="@{/add-own-recipe}" method="get">
+        <div>
+            <label for="name">Recipe Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="category">Category:</label>
+            <input type="text" id="category" name="name" required>
+        </div>
+        <div>
+            <label for="instructions">Instructions:</label>
+            <textarea id="instructions" name="instructions" rows="5" required></textarea>
+        </div>
+        <div>
+            <label for="time">Preparation Time (minutes):</label>
+            <input type="number" id="time" name="prepTime" min="1" required>
+        </div>
+        <div>
+            <button type="submit">Add Recipe</button>
+        </div>
+    </form>
+    <div>
+        <a href="/user/profile">
+            <button style="position: fixed; top: 10px; right: 10px;">User profile</button>
+        </a>
+    </div>
+</div>
+<div>
+    <a href="/">Back to Home</a>
+</div>
+</body>
+</html>

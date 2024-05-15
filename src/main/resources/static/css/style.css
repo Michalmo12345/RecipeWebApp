@@ -1,0 +1,232 @@
+/* Body Styling */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1;
+    padding: 30px;
+    background: url('../images/background.jpg') no-repeat center center fixed; /* Background photo */
+    background-size: cover; /* Cover the entire background */
+    color: #ffffff; /* White text color */
+}
+
+.container h2 {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 50px; /* Adjust the font size as needed */
+    color: #ffffff; /* Black text color */
+}
+
+.container2 h2 {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 50px; /* Adjust the font size as needed */
+    color: #ffffff; /* Black text color */
+}
+
+/* Container Styling */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center vertically */
+    padding: 30px;
+    background-color: rgb(43, 49, 44, 0.9);  /* Green background color */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: Add shadow effect */
+    gap: 15px; /* Adjust the space between elements */
+    max-width: 600px; /* Set maximum width */
+    margin: auto; /* Center horizontally */
+}
+
+.container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center vertically */
+    padding: 30px;
+    background-color: rgb(43, 49, 44, 0.9);  /* Green background color */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: Add shadow effect */
+    gap: 15px; /* Adjust the space between elements */
+    margin: auto; /* Center horizontally */
+}
+
+/* Add this to your existing CSS */
+
+/* Add this to your existing CSS */
+
+/* Add this to your existing CSS */
+
+/* Container Styling */
+.container3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    background-color: rgb(43, 49, 44, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    gap: 15px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.recipe {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+.favorite-btn form {
+    display: flex;
+    align-items: center;
+}
+
+.favorite-btn input[type="submit"] {
+    padding: 5px 10px;
+    font-size: 14px;
+    margin-right: 60px; /* Move the favorite button to the right */
+}
+
+.recipe-details {
+    flex: 1;
+    color: black; /* Set recipe text color to black */
+    margin-left: 120px; /* Adjust margin to move the text to the right */
+}
+
+.recipe-details h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: black; /* Set recipe name color to black */
+}
+
+.recipe-details p {
+    margin: 5px 0;
+    color: black; /* Set recipe detail text color to black */
+}
+
+
+
+.container h1 {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 50px; /* Adjust the font size as needed */
+    color: #ffffff; /* White text color */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Ensure the form takes the full width of the container */
+}
+
+input[type="email"]{
+    padding: 15px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 20px;
+}
+input[type="text"],
+input[type="password"] {
+    padding: 15px;
+    margin-bottom: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+/* Button Styling */
+input[type="submit"] {
+    padding: 15px 30px; /* Adjust padding */
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF; /* Button color */
+    color: #fff; /* Text color */
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3; /* Hover color */
+}
+
+button {
+    padding: 15px;
+    width: 300px; /* Fixed width */
+    height: 60px; /* Fixed height */
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Link Styling */
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Error Message Styling */
+.error {
+    color: red;
+    margin-bottom: 20px;
+}
+
+/* Title Styling */
+.container h1 {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 50px; /* Big font size */
+    color: #000000; /* Black text color */
+}
+
+/* Additional Styling for Register Page */
+#register-title {
+    color: #333;
+    text-align: center;
+}
+
+/* Additional Styling for Login Page */
+#login-title {
+    color: #333;
+    text-align: center;
+}
+
+/* Button Container Styling */
+.buttons {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center;
+    gap: 10px; /* Adjust the space between buttons */
+}

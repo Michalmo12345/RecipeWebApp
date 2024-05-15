@@ -1,7 +1,9 @@
 package com.example.recipeapp;
 
-import com.example.recipeapp.run.Ingredient;
-import com.example.recipeapp.run.Recipe;
+import com.example.recipeapp.models.Ingredient;
+import com.example.recipeapp.models.Recipe;
+
+import com.example.recipeapp.repositories.RecipeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -13,16 +15,9 @@ import java.util.List;
 public class RecipeAppApplication {
 
     private static final Logger log = LoggerFactory.getLogger(RecipeAppApplication.class);
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         SpringApplication.run(RecipeAppApplication.class, args);
     }
 
-    @Bean
-    CommandLineRunner runner() {
-        return args -> {
-            Recipe recipe = new Recipe(1,"Spaghetti", "A simple pasta recipe", List.of("Italian", "Pasta"), "Cook the pasta", List.of(new Ingredient("Pasta", "200g"), new Ingredient("Tomato Sauce", "500g")));
-            log.info(recipe.toString());
-        };
-    }
 }
