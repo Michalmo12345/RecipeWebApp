@@ -13,7 +13,5 @@ public interface UserService {
 
     User findByUsername(String username);
 
-
-
 //    UserDetailsService userDetailsService();
 }

@@ -40,6 +40,12 @@
         </tbody>
     </table>
 </div>
+<div>
+    <a href="/user/profile">
+        <button style="position: fixed; top: 10px; right: 10px;">User profile</button>
+    </a>
+</div>
+
 <!-- Display a message if the recipes list is empty -->
 <div th:if="${#lists.isEmpty(recipes)}">
     <p>No recipes available.</p>
