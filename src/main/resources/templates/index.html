@@ -6,15 +6,14 @@
     <link rel="stylesheet" href="/css/style.css"> <!-- Optional: Link to your CSS file for styling -->
 </head>
 <body>
-<div class="container">
 
+<div class="container">
     <div th:if="${param.success}" class="alert alert-success">
             You have successfully registered.
     </div>
-    <h2>Gotuj z KLASA!</h2>
-
-    <div class="buttons">
-    <button onclick="window.location.href='/add-recipe';">Add Recipe</button>
+    <h1 th:text="${message}">Recipe Application</h1>
+<div class="buttons">
+    <button onclick="window.location.href='/add-own-recipe';">Add Recipe</button>
     <button onclick="window.location.href='/view-recipes';">View Recipes</button>
     <button onclick="window.location.href='/search-recipes';">Search Recipes</button>
 </div>
