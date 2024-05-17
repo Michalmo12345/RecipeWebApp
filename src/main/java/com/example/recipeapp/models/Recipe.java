@@ -26,8 +26,7 @@ public class Recipe {
     public void setCreator(User user){
         this.user = user;
     }
-    public Recipe(Integer id, String name, String category, String instructions, int time, List<Ingredient> ingredients) {
-        this.id = id;
+    public Recipe(String name, String category, String instructions, int time, List<Ingredient> ingredients) {
         this.name = name;
         this.category = category;
         this.instructions = instructions;
@@ -60,8 +59,7 @@ public class Recipe {
     }
 
     public String toString() {
-        return id + "," +
-                name + "," +
+        return name + "," +
                 category + "," +
                 instructions + "," +
 //                ", ingredients=" + ingredients.stream().map(Ingredient::toString).collect(Collectors.joining(", ")) + "\n" +

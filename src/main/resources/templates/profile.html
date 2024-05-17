@@ -6,13 +6,18 @@
 <body>
 <h1>User profile</h1>
 <div>
-    <p>Nazwa użytkownika: <span th:text="${user.getUsername()}"></span></p>
+    <p>Username: <span th:text="${user.getUsername()}"></span></p>
     <p>Email: <span th:text="${user.getEmail()}"></span></p>
     <p>Number of added recipes  <span th:text="${user.getRecipeCount()}"></span></p>
 </div>
 <div>
     <a href="/user/calorie-calculator">
         <button>Caloric need calculator</button>
+    </a>
+</div>
+<div>
+    <a href="/">
+        <button>Home page</button>
     </a>
 </div>
 </body>

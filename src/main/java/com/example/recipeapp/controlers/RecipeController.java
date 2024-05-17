@@ -45,30 +45,35 @@ public class RecipeController {
         return "view-recipes";
     }
 
+    @GetMapping("/add-own-recipe")
+    public String addOwnRecipe(Model model) {
+        return "add-own-recipe";
+    }
+
     @GetMapping("/search-recipes")
     public String searchRecipes(@RequestParam(required = false) String query, Model model) {
         List<Recipe> recipes;
         if (query != null && !query.isEmpty()) {
             recipes = recipeApiHandler.getRecipes(query);
         } else {
-            recipes = List.of(); // or provide some default list of recipes
+            recipes = List.of();
         }
         model.addAttribute("recipes", recipes);
-        return "api-recipes"; // This is the name of the Thymeleaf template (e.g., recipes.html under src/main/resources/templates)
+        return "api-recipes";
     }
 
     @PostMapping("/add-recipe")
     public String addRecipe(@RequestParam("recipe") String recipeString) {
         Recipe recipe = recipeApiHandler.convertFromString(recipeString);
         recipeService.saveRecipe(recipe);
-        return "redirect:/search-recipes";
+        return "redirect:/view-recipes";
     }
 
-    @GetMapping("/add-own-recipe")
+    @PostMapping("/add-own-recipe")
     public String addOwnRecipe(@RequestParam("recipe") String recipeString) {
         Recipe recipe = recipeApiHandler.convertFromString(recipeString);
         recipeService.saveRecipe(recipe);
-        return "add-own-recipe";
+        return "redirect:/view-recipes";
     }
 
     @PostMapping("/view-recipe/{recipeId}/delete")
