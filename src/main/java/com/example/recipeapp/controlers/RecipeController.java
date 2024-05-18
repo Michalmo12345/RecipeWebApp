@@ -2,6 +2,7 @@ package com.example.recipeapp.controlers;
 
 
 import com.example.recipeapp.api.RecipeApiHandler;
+import com.example.recipeapp.export.CsvExporter;
 import com.example.recipeapp.models.Ingredient;
 import com.example.recipeapp.models.Recipe;
 import com.example.recipeapp.repositories.RecipeRepository;
@@ -10,6 +11,8 @@ import com.example.recipeapp.services.RecipeService;
 import com.example.recipeapp.services.UserService;
 import com.example.recipeapp.models.User;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -80,5 +83,22 @@ public class RecipeController {
     public String deleteRecipe(@PathVariable Integer recipeId) {
         recipeService.deleteRecipe(recipeId);
         return "redirect:/view-recipes";
+    }
+
+    @GetMapping("/user/export-recipes")
+    public ResponseEntity<String> exportRecipes(@RequestParam(required = false) String filename) {
+        String username = SecurityUtil.getSessionUser();
+        List<Recipe> recipes = recipeService.findAllUserRecipes(username);
+        String csvData = CsvExporter.convertToCSV(recipes);
+        HttpHeaders headers = new HttpHeaders();
+        if (filename == null || filename.trim().isEmpty()) {
+            filename = "my_recipes.csv";
+        } else {
+            filename = filename.trim().replace(" ", "_") + ".csv";
+        }
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"");
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(csvData);
     }
 }

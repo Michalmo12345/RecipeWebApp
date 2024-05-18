@@ -1,14 +1,19 @@
 package com.example.recipeapp.controlers;
 
+import com.example.recipeapp.models.Recipe;
 import com.example.recipeapp.models.User;
 import com.example.recipeapp.repositories.UserRepository;
 import com.example.recipeapp.security.SecurityUtil;
+import com.example.recipeapp.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -37,6 +42,7 @@ public class UserController {
         model.addAttribute("user", user);
         return "profile";
     }
+
 
     private double calculateBMR(int age, int weight, int height, String gender) {
         if (gender.equals("male")) {

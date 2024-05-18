@@ -11,6 +11,13 @@
     <p>Number of added recipes  <span th:text="${user.getRecipeCount()}"></span></p>
 </div>
 <div>
+    <form action="/user/export-recipes" method="get">
+        <label for="filename">Save recipes as (optional):</label>
+        <input type="text" id="filename" name="filename" placeholder="Enter filename">
+        <button type="submit">Download Recipes</button>
+    </form>
+</div>
+<div>
     <a href="/user/calorie-calculator">
         <button>Caloric need calculator</button>
     </a>
