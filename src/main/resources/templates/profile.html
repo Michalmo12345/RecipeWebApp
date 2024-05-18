@@ -12,8 +12,16 @@
 </div>
 <div>
     <form action="/user/export-recipes" method="get">
-        <label for="filename">Save recipes as (optional):</label>
+        <label for="filename">Save favourite recipes as </label>
         <input type="text" id="filename" name="filename" placeholder="Enter filename">
+
+        <label for="format">Select format:</label>
+        <select id="format" name="format">
+            <option value="csv">CSV</option>
+            <option value="json">JSON</option>
+            <option value="txt">Text</option>
+        </select>
+
         <button type="submit">Download Recipes</button>
     </form>
 </div>
