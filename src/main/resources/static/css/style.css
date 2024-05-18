@@ -9,13 +9,28 @@ body {
     color: #ffffff; /* White text color */
 }
 
-.container h2 {
-    margin-bottom: 30px;
-    text-align: center;
-    font-size: 50px; /* Adjust the font size as needed */
-    color: #ffffff; /* Black text color */
+.home-icon {
+    width: 50px;
+    height:50px;
+    margin-right: 5px;
+    vertical-align: middle;
 }
 
+.user-icon{
+    width: 80px;
+    height:80px;
+    margin-right: 10px;
+    margin-top: 10px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+.delete-btn {
+    font-size: 16px; /* Adjust the font size to make it smaller */
+    padding: 6px 12px; /* Adjust the padding to make it smaller */
+    width: auto; /* Ensure width is auto */
+    height: auto; /* Ensure height is auto */
+}
 .container2 h2 {
     margin-bottom: 30px;
     text-align: center;
@@ -49,15 +64,9 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: Add shadow effect */
     gap: 15px; /* Adjust the space between elements */
     margin: auto; /* Center horizontally */
+    max-width: 1200px; /* Set maximum width */
 }
 
-/* Add this to your existing CSS */
-
-/* Add this to your existing CSS */
-
-/* Add this to your existing CSS */
-
-/* Container Styling */
 .container3 {
     display: flex;
     flex-direction: column;
@@ -87,9 +96,9 @@ body {
 }
 
 .favorite-btn input[type="submit"] {
-    padding: 5px 10px;
-    font-size: 14px;
-    margin-right: 60px; /* Move the favorite button to the right */
+    padding: 7px 13px;
+    font-size: 16px;
+    margin-right: 60px;/* Move the favorite button to the right */
 }
 
 .recipe-details {

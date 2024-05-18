@@ -55,7 +55,7 @@ public class RecipeApiHandler extends ApiHandler{
 //                JSONArray ingredients = (JSONArray) recipe.get("ingredients");
 //                List<Ingredient> ingredientList = new ObjectMapper().readValue(ingredients.toJSONString(), List.class);
                 List<Ingredient> ingredients = new ArrayList<>();
-                recipes.add(new Recipe(i, name, category, instructions, time, ingredients));
+                recipes.add(new Recipe(name, category, instructions, time, ingredients));
             }
             return recipes;
 
@@ -71,14 +71,14 @@ public class RecipeApiHandler extends ApiHandler{
     }
     public Recipe convertFromString(String recipeString) {
         String[] parts = recipeString.split(",");
-        Integer id = Integer.parseInt(parts[0]);
-        String name = parts[1];
-        String category = parts[2];
-        String instructions = parts[3];
-        int time = Integer.parseInt(parts[4]);
+//        Integer id = Integer.parseInt(parts[0]);
+        String name = parts[0];
+        String category = parts[1];
+        String instructions = parts[2];
+        int time = Integer.parseInt(parts[3]);
 
 
-        return new Recipe(id, name, category, instructions, time, new ArrayList<>());
+        return new Recipe(name, category, instructions, time, new ArrayList<>());
 
     }
 }

@@ -4,14 +4,6 @@
     <meta charset="UTF-8">
     <title>Search Results</title>
     <link rel="stylesheet" href="/css/style.css">
-    <style>
-        .home-icon {
-            width: 40px;
-            height:40px;
-            margin-right: 5px;
-            vertical-align: middle;
-        }
-    </style>
 </head>
 <body>
 <div>
@@ -36,17 +28,12 @@
                     <div class="recipe-details">
                         <h3 th:text="${recipe.getName()}">Recipe Name</h3>
                         <p>Preparation time: <span th:text="${recipe.getTime()}"></span></p>
-                        <p>Instructions: <a th:href="${recipe.getInstructions()}">Link</a></p>
+                        <p>Instructions: <a th:href="${recipe.getInstructions()}" target="_blank">Link</a></p>
                         <p>Category: <span th:text="${recipe.getCategory()}"></span></p>
                     </div>
                 </div>
             </li>
         </ul>
-    </div>
-    <div>
-        <a href="/user/profile">
-            <button style="position: fixed; top: 10px; right: 10px;">User profile</button>
-        </a>
     </div>
 </div>
 </body>
