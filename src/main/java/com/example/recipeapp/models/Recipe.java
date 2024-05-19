@@ -15,7 +15,7 @@ public class Recipe {
     private String category;
     private String instructions;
     private int time;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ingredient> ingredients;
 
     @ManyToOne
@@ -59,10 +59,18 @@ public class Recipe {
     }
 
     public String toString() {
-        return name + "," +
-                category + "," +
-                instructions + "," +
-//                ", ingredients=" + ingredients.stream().map(Ingredient::toString).collect(Collectors.joining(", ")) + "\n" +
-                time;
+        String ingredientsString = "";
+        for (Ingredient ingredient : ingredients) {
+            ingredientsString += ingredient.toString() + "#";
+        }
+        return name + ";" +
+                category + ";" +
+                instructions + ";" +
+                time + ";" +
+                ingredientsString;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 }

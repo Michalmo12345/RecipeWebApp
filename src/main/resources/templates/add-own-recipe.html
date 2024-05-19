@@ -14,6 +14,7 @@
         <span class="input-group-text">Name</span>
         <input type="text" id="name" class="form-control" required>
     </div>
+
     <div class="input-group input-group-default mb-3">
         <span class="input-group-text">Category</span>
         <input type="text" id="category" class="form-control" required>
@@ -26,10 +27,20 @@
 
     <div class="input-group mb-3">
         <span class="input-group-text">Time</span>
-        <span class="input-group-text">minutes</span>
+        <span class="input-group-text">(in minutes)</span>
         <input type="text" id="time" class="form-control">
     </div>
+
+    <div class="input-group">
+        <span class="input-group-text">Ingredients</span>
+        <textarea id="ingredients" class="form-control"
+                  placeholder="Please add one ingredient in one line in format: <ingredient>, <weight in grams>"></textarea>
+    </div>
+
+    <div>
         <button id="recipeSubmit">Add recipe</button>
+    </div>
+
     <div>
         <form th:action="@{/add-own-recipe}" th:method="post" id="recipeForm">
             <input type="hidden" id="recipe" name="recipe">
@@ -51,8 +62,17 @@
         var category = document.getElementById('category').value;
         var instructions = document.getElementById('instructions').value;
         var time = document.getElementById('time').value;
-        if(name !== "" || category!=="" || instructions!=="" || time!=="") {
-            var formattedData = name + ',' + category + ',' + instructions + ',' + time;
+        var ingredients = document.getElementById('ingredients').value;
+        if(name !== "" || category!=="" || instructions!=="" || time!=="" || ingredients!=="" ){
+            let lines = ingredients.split('\n');
+            let formattedParts = [];
+            for (let line of lines) {
+                let parts = line.split(',').map(part => part.trim());
+                formattedParts.push(parts.join('!'));
+            }
+            ingredients = formattedParts.join('#');
+
+            var formattedData = name + ';' + category + ';' + instructions + ';' + time + ';' + ingredients;
 
             document.getElementById('recipe').value = formattedData;
 

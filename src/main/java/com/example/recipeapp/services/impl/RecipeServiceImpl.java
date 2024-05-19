@@ -1,5 +1,6 @@
 package com.example.recipeapp.services.impl;
 
+import com.example.recipeapp.models.Ingredient;
 import com.example.recipeapp.models.Recipe;
 import com.example.recipeapp.models.User;
 import com.example.recipeapp.repositories.RecipeRepository;
@@ -27,6 +28,10 @@ public class RecipeServiceImpl implements RecipeService {
         String username = SecurityUtil.getSessionUser();
         User user = userRepository.findByUsername(username);
         recipe.setCreator(user);
+        List<Ingredient> ingredients = recipe.getIngredients();
+        for (Ingredient ingredient: ingredients){
+            ingredient.setRecipe(recipe);
+        }
         recipeRepository.save(recipe);
     }
 

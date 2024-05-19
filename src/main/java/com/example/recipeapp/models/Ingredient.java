@@ -13,43 +13,49 @@ public class Ingredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
     private String name;
-    private String amount;
+    private Double weight;
 
-//    private Map<String, Double> nutrition;
-    @ManyToOne
-    @JoinColumn(name = "recipe_id",nullable = false)
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
 
     public Ingredient() {
     }
 
-    public Ingredient(String name, String amount, Map<String, Double> nutrition) {
+    public Ingredient(String name, Double weight) {
         this.name = name;
-        this.amount = amount;
-//        this.nutrition = nutrition;
+        this.weight = weight;
+
     }
 
     public String getName() {
         return name;
     }
 
-    public String getAmount() {
-        return amount;
+    public Double getWeight() {
+        return weight;
     }
 
-//    public Map<String, Double> getNutrition() {
-//        return nutrition;
-//    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
 
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-//        for (Map.Entry<String, Double> entry : nutrition.entrySet()) {
-//            sb.append(entry.getKey()).append(": ").append(entry.getValue()).append(", ");
-//        }
-        return "Ingredient{" +
-                "name='" + name + '\'' +
-                ", amount='" + amount + '\'' +
-//                ", nutrition=" + sb.toString() +
-                '}';
+        return name + "!" + weight;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 }
