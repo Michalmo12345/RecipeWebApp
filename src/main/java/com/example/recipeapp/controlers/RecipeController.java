@@ -68,6 +68,7 @@ public class RecipeController {
 
     @PostMapping("/add-recipe")
     public String addRecipe(@RequestParam("recipe") String recipeString) {
+        System.out.println(recipeString);
         Recipe recipe = recipeApiHandler.convertFromString(recipeString);
         recipeService.saveRecipe(recipe);
         return "redirect:/view-recipes";
