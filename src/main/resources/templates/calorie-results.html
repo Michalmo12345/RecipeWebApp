@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Wyniki Kaloryczne</title>
+    <link rel="stylesheet"  href="/css/style.css">
 </head>
 <body>
-    <h1>Twoje zapotrzebowanie kaloryczne:</h1>
+<div>
+    <a href="/?continue"><img src="../images/home.jpg" alt="Home" class="home-icon"></a>
+</div>
+<div class="container2">
+    <h2>Twoje zapotrzebowanie kaloryczne:</h2>
     <p th:text="${calories} + ' kcal/dzień'"></p>
-    <a href="/user/profile">Powrót do profilu</a>
+    <a href="/user/profile"><img src="../images/user.png" alt="User" class="user-icon"></a>
+</div>
 </body>
 </html>
