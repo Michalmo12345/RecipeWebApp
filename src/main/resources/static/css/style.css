@@ -91,8 +91,6 @@ body {
 .container4 {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center; /* Center vertically */
     padding: 30px;
     background-color: rgb(43, 49, 44, 0.9);
     border-radius: 8px;
@@ -101,10 +99,23 @@ body {
     margin: auto;
     max-width: 500px;
 }
+
+.container4 button {
+    padding: 15px;
+    width: 300px; /* Fixed width */
+    height: 60px; /* Fixed height */
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 100px;
+    transition: background-color 0.3s ease;
+}
 /* Add these styles to your existing CSS */
 .container4 .input-group-text {
     font-size: 24px; /* Increase font size */
-    margin-right: 50px;
     align-items: flex-end; /* Center horizontally */
 }
 
@@ -113,17 +124,36 @@ body {
     align-items: flex-end; /* Center horizontally */
 }
 
+.container4 .form-control_name {
+    font-size: 20px; /* Increase font size */
+    align-items: flex-end; /* Center horizontally */
+    margin-left: 56px;
+}
+
+.container4 .form-control_category {
+    font-size: 20px; /* Increase font size */
+    align-items: flex-end; /* Center horizontally */
+    margin-left: 24px;
+}
+
+.container4 .form-control_ingredients {
+    font-size: 20px; /* Increase font size */
+    align-items: flex-end; /* Center horizontally */
+    margin-left: 8px;
+}
+
 .container4 label {
     font-size: 24px; /* Increase font size */
     font-weight: bold; /* Make the labels bold */
     margin-top: 20px; /* Add margin on top */
     margin-bottom: 20px; /* Add margin on bottom */
+    margin-left: 80px;
     align-items: flex-end; /* Center horizontally */
 }
 
 .container4 h2 {
     margin-bottom: 30px;
-    margin-right: 50px;
+    margin-left: 24px;
     text-align: center;
     font-size: 50px; /* Adjust the font size as needed */
     color: #ffffff; /* Black text color */

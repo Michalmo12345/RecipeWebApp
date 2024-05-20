@@ -4,10 +4,39 @@
     <meta charset="UTF-8">
     <title>View Recipes</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Link to your CSS file for styling -->
+    <style>
+        .collapsible {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 5px 10px; /* Reduced padding for a smaller button */
+            width: auto; /* Auto width to fit the content */
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 12px; /* Smaller font size */
+            border-radius: 5px; /* Optional: Add some border radius */
+        }
+
+        .active, .collapsible:hover {
+            background-color: #555;
+        }
+
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #333; /* Dark grey background for the container */
+            color: #000000; /* White text inside the container */
+            margin-top: 5px; /* Space between button and content */
+            border-radius: 5px; /* Optional: Add some border radius */
+        }
+
+    </style>
 </head>
 <body>
 <div>
-    <a href="/?continue"><img src="../images/home.jpg" alt="Home" class="home-icon"> </a>
+    <a href="/?continue"><img src="../images/home.jpg" alt="Home" class="home-icon"></a>
 </div>
 <div class="container2">
     <!-- Check if the recipes list is not empty -->
@@ -19,14 +48,22 @@
                 <th style="padding: 20px;">Name</th>
                 <th style="padding: 20px;">Description</th>
                 <th style="padding: 20px;">Ingredients</th>
+                <th style="padding: 20px;">Actions</th>
             </tr>
             </thead>
             <tbody>
             <!-- Loop through the recipes list -->
             <tr th:each="recipe : ${recipes}">
                 <td th:text="${recipe.getName()}">Recipe Name</td>
-                <td> <a th:href="${recipe.getInstructions()}" target="_blank">Recipe description </a></td>
-                <td>  ing </td>
+                <td><a th:href="${recipe.getInstructions()}" target="_blank">Recipe description</a></td>
+                <td>
+                    <button class="collapsible">Show Ingredients</button>
+                    <div class="content">
+                        <ul>
+                            <li th:each="ingredient : ${recipe.getIngredients()}" th:text="${ingredient}">Ingredient</li>
+                        </ul>
+                    </div>
+                </td>
                 <td>
                     <form th:action="@{'/view-recipe/' + ${recipe.getId()} + '/delete'}" method="post">
                         <button type="submit" class="delete-btn">Delete</button>
@@ -40,5 +77,21 @@
         <p>No recipes available.</p>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var coll = document.getElementsByClassName("collapsible");
+        for (var i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    });
+</script>
 </body>
 </html>

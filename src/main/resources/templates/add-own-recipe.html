@@ -13,12 +13,12 @@
     <h2>Add a New Recipe</h2>
     <div class="input-group input-group-default mb-3">
         <span class="input-group-text">Name: </span>
-        <input type="text" id="name" class="form-control" required>
+        <input type="text" id="name" class="form-control_name" required>
     </div>
 
     <div class="input-group input-group-default mb-3">
         <span class="input-group-text">Category: </span>
-        <input type="text" id="category" class="form-control" required>
+        <input type="text" id="category" class="form-control_category" required>
     </div>
 
     <div class="input-group">
@@ -27,15 +27,13 @@
     </div>
 
     <div class="input-group mb-3">
-        <span class="input-group-text">Time</span>
-        <span class="input-group-text">(in minutes)</span>
-        <input type="text" id="time" class="form-control">
+        <span class="input-group-text">Time (mins):</span>
+        <input type="number" id="time" class="form-control" min="0">
     </div>
 
     <div class="input-group">
-        <span class="input-group-text">Ingredients</span>
-        <textarea id="ingredients" class="form-control"
-                  placeholder="Please add one ingredient in one line in format: <ingredient>, <weight in grams>"></textarea>
+        <span class="input-group-text">Ingredients: </span>
+        <textarea id="ingredients" class="form-control_ingredients"></textarea>
     </div>
 
     <div>
@@ -54,31 +52,46 @@
 </div>
 <script>
     function formatRecipeData(event) {
-        var name = document.getElementById('name').value;
-        var category = document.getElementById('category').value;
-        var instructions = document.getElementById('instructions').value;
-        var time = document.getElementById('time').value;
-        var ingredients = document.getElementById('ingredients').value;
-        if(name !== "" || category!=="" || instructions!=="" || time!=="" || ingredients!=="" ){
-            let lines = ingredients.split('\n');
-            let formattedParts = [];
-            for (let line of lines) {
-                let parts = line.split(',').map(part => part.trim());
-                formattedParts.push(parts.join('!'));
-            }
-            ingredients = formattedParts.join('#');
+        event.preventDefault(); // Prevent the default form submission
 
-            var formattedData = name + ';' + category + ';' + instructions + ';' + time + ';' + ingredients;
+        var name = document.getElementById('name').value.trim();
+        var category = document.getElementById('category').value.trim();
+        var instructions = document.getElementById('instructions').value.trim();
+        var time = document.getElementById('time').value.trim();
+        var ingredients = document.getElementById('ingredients').value.trim();
 
-            document.getElementById('recipe').value = formattedData;
-
-            document.getElementById('recipeForm').submit();
+        // Check if all fields are filled
+        if (name === "" || category === "" || instructions === "" || time === "" || ingredients === "") {
+            alert("You have to fill all fields before submitting.");
+            return; // Exit the function if validation fails
         }
 
+        // Split ingredients by line
+        var lines = ingredients.split('\n');
+        for (var i = 0; i < lines.length; i++) {
+            var ingredient = lines[i].trim();
+            // Check if ingredient is in the correct format: "name, number"
+            var ingredientsRegex = /^[\w\s]+,\s*\d+(\.\d+)?$/; // Name, Quantity
+            if (!ingredientsRegex.test(ingredient)) {
+                alert("Ingredients have to be added as such: IngredientName, IngredientQuantity. Each ingredient in new line");
+                return; // Exit the function if ingredients format is incorrect
+            }
+        }
+
+        // Format the ingredients
+        var formattedIngredients = lines.map(function(line) {
+            var parts = line.split(',').map(part => part.trim());
+            return parts.join('!');
+        }).join('#');
+
+        var formattedData = name + ';' + category + ';' + instructions + ';' + time + ';' + formattedIngredients;
+
+        document.getElementById('recipe').value = formattedData;
+
+        document.getElementById('recipeForm').submit();
     }
 
     document.getElementById("recipeSubmit").addEventListener("click", formatRecipeData);
-
 </script>
 </body>
 </html>
