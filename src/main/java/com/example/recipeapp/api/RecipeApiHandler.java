@@ -62,6 +62,7 @@ public class RecipeApiHandler extends ApiHandler{
                     JSONObject ingredientObj = (JSONObject) ingredient;
                     String ingredientName = (String) ingredientObj.get("text");
                     Double weight = (Double) ingredientObj.get("weight");
+                    weight = Math.round(weight * 100.0) / 100.0;
                     Ingredient ing = new Ingredient(ingredientName, weight);
                     ingList.add(ing);
                 }

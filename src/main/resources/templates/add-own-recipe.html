@@ -23,7 +23,7 @@
 
     <div class="input-group">
         <span class="input-group-text">Instructions: </span>
-        <input type="text" id="instructions" class="form-control">
+        <textarea id="instructions" class="form-control"></textarea>
     </div>
 
     <div class="input-group mb-3">
@@ -70,8 +70,8 @@
         var lines = ingredients.split('\n');
         for (var i = 0; i < lines.length; i++) {
             var ingredient = lines[i].trim();
-            // Check if ingredient is in the correct format: "name, number"
-            var ingredientsRegex = /^[\w\s]+,\s*\d+(\.\d+)?$/; // Name, Quantity
+            // Adjusted regex to accommodate various characters in ingredient names
+            var ingredientsRegex = /^[\w\sąęćłńóśźżĄĘĆŁŃÓŚŹŻ,.-]+\s*,\s*\d+(\.\d+)?$/; // Name, Quantity
             if (!ingredientsRegex.test(ingredient)) {
                 alert("Ingredients have to be added as such: IngredientName, IngredientQuantity. Each ingredient in new line");
                 return; // Exit the function if ingredients format is incorrect

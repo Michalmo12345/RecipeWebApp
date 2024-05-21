@@ -60,7 +60,7 @@
                     <button class="collapsible">Show Ingredients</button>
                     <div class="content">
                         <ul>
-                            <li th:each="ingredient : ${recipe.getIngredients()}" th:text="${ingredient}">Ingredient</li>
+                            <li th:each="ingredient : ${recipe.getIngredients()}" class="ingredient" th:text="${ingredient}">Ingredient</li>
                         </ul>
                     </div>
                 </td>
@@ -77,11 +77,13 @@
         <p>No recipes available.</p>
     </div>
 </div>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
+        // Collapsible functionality
         var coll = document.getElementsByClassName("collapsible");
         for (var i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
+            coll[i].addEventListener("click", function () {
                 this.classList.toggle("active");
                 var content = this.nextElementSibling;
                 if (content.style.display === "block") {
@@ -91,6 +93,20 @@
                 }
             });
         }
+
+        // Format ingredients
+        function formatIngredient(ingredient) {
+            var ingredientData = ingredient.split("!");
+            var ingredientString = ingredientData[0] + ", " + ingredientData[1] + "g";
+            return ingredientString;
+        }
+
+        var ingredients = document.querySelectorAll(".ingredient");
+        ingredients.forEach(function(ingredientElement) {
+            var originalText = ingredientElement.textContent;
+            var formattedText = formatIngredient(originalText);
+            ingredientElement.textContent = formattedText;
+        });
     });
 </script>
 </body>
