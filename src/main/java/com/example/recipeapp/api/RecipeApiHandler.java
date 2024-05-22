@@ -25,6 +25,11 @@ public class RecipeApiHandler extends ApiHandler{
 
     public List<Recipe> getRecipes(String query) {
         String urlString = String.format(baseUrl, query, userId, apiKey);
+        for (char c : query.toCharArray()) {
+            if (c == ' ') {
+                urlString = urlString.replace(" ", "%20");
+            }
+        }
         try {
             URL url = new URL(urlString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -51,11 +56,17 @@ public class RecipeApiHandler extends ApiHandler{
                 String instructions = (String) recipe.get("url");
                 Double time_d = (Double) recipe.get("totalTime");
                 int time = time_d.intValue();
-//                TODO: Make proper cast to List<Ingredient>
-//                JSONArray ingredients = (JSONArray) recipe.get("ingredients");
-//                List<Ingredient> ingredientList = new ObjectMapper().readValue(ingredients.toJSONString(), List.class);
-                List<Ingredient> ingredients = new ArrayList<>();
-                recipes.add(new Recipe(name, category, instructions, time, ingredients));
+                JSONArray ingredients = (JSONArray) recipe.get("ingredients");
+                List<Ingredient> ingList = new ArrayList<>();
+                for (Object ingredient: ingredients) {
+                    JSONObject ingredientObj = (JSONObject) ingredient;
+                    String ingredientName = (String) ingredientObj.get("text");
+                    Double weight = (Double) ingredientObj.get("weight");
+                    weight = Math.round(weight * 100.0) / 100.0;
+                    Ingredient ing = new Ingredient(ingredientName, weight);
+                    ingList.add(ing);
+                }
+                recipes.add(new Recipe(name, category, instructions, time, ingList));
             }
             return recipes;
 
@@ -70,15 +81,27 @@ public class RecipeApiHandler extends ApiHandler{
         }
     }
     public Recipe convertFromString(String recipeString) {
-        String[] parts = recipeString.split(",");
-//        Integer id = Integer.parseInt(parts[0]);
+        String[] parts = recipeString.split(";");
         String name = parts[0];
         String category = parts[1];
         String instructions = parts[2];
         int time = Integer.parseInt(parts[3]);
+        String ingredientsString = parts[4];
+        String[] ingredients = ingredientsString.split("#");
+        List<Ingredient> ingredientList = new ArrayList<>();
+        for (String ingredient : ingredients) {
+            String[] ingredientParts = ingredient.split("!");
+            String ingredientName = ingredientParts[0];
+            Double weight = Double.parseDouble(ingredientParts[1]);
+            ingredientList.add(new Ingredient(ingredientName, weight));
+        }
 
 
-        return new Recipe(name, category, instructions, time, new ArrayList<>());
+        return new Recipe(name, category, instructions, time, ingredientList);
 
     }
+//    public static void main(String[] args) {
+//        RecipeApiHandler recipeApiHandler = new RecipeApiHandler();
+//        System.out.println(recipeApiHandler.getRecipes("cooked chicken"));
+//    }
 }

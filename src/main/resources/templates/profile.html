@@ -2,14 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>User Profile</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<h1>User profile</h1>
 <div>
-    <p>Username: <span th:text="${user.getUsername()}"></span></p>
-    <p>Email: <span th:text="${user.getEmail()}"></span></p>
-    <p>Number of added recipes  <span th:text="${user.getRecipeCount()}"></span></p>
+    <a href="/?continue"><img src="../images/home.jpg" alt="Home" class="home-icon"> </a>
 </div>
+<div class="container2">
+    <h2>User Profile</h2>
+    <div>
+        <p class="user-info">Username: <span class="user-info" th:text="${user.getUsername()}"></span></p>
+        <p class="user-info">Email: <span class="user-info" th:text="${user.getEmail()}"></span></p>
+        <p class="user-info">Number of added recipes: <span class="user-info" th:text="${user.getRecipeCount()}"></span></p>
+    </div>
+    <div class="buttons">
+        <a href="/user/calorie-calculator">
+            <button>Caloric Need Calculator</button>
+        </a>
+    </div>
 <div>
     <form action="/user/export-recipes" method="get">
         <label for="filename">Save favourite recipes as </label>
@@ -24,16 +34,6 @@
 
         <button type="submit">Download Recipes</button>
     </form>
-</div>
-<div>
-    <a href="/user/calorie-calculator">
-        <button>Caloric need calculator</button>
-    </a>
-</div>
-<div>
-    <a href="/">
-        <button>Home page</button>
-    </a>
 </div>
 </body>
 </html>

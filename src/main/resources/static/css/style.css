@@ -10,8 +10,8 @@ body {
 }
 
 .home-icon {
-    width: 50px;
-    height:50px;
+    width: 80px;
+    height:80px;
     margin-right: 5px;
     vertical-align: middle;
 }
@@ -38,6 +38,27 @@ body {
     color: #ffffff; /* Black text color */
 }
 
+
+
+.container3 h2 {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 50px; /* Adjust the font size as needed */
+    color: #ffffff; /* Black text color */
+}
+
+.container h2 {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 50px; /* Adjust the font size as needed */
+    color: #ffffff; /* Black text color */
+}
+
+.user-info {
+    font-size: 24px; /* Increase font size as needed */
+    font-weight: bold; /* Optional: Make the text bold */
+}
+
 /* Container Styling */
 .container {
     display: flex;
@@ -47,7 +68,7 @@ body {
     padding: 30px;
     background-color: rgb(43, 49, 44, 0.9);  /* Green background color */
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: Add shadow effect */
+    box-shadow: 0 0 10px rgb(255, 255, 255); /* Optional: Add shadow effect */
     gap: 15px; /* Adjust the space between elements */
     max-width: 600px; /* Set maximum width */
     margin: auto; /* Center horizontally */
@@ -65,6 +86,85 @@ body {
     gap: 15px; /* Adjust the space between elements */
     margin: auto; /* Center horizontally */
     max-width: 1200px; /* Set maximum width */
+}
+
+.container4 {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    background-color: rgb(43, 49, 44, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    gap: 15px;
+    margin: auto;
+    max-width: 500px;
+}
+
+.container4 button {
+    padding: 15px;
+    width: 300px; /* Fixed width */
+    height: 60px; /* Fixed height */
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 100px;
+    transition: background-color 0.3s ease;
+}
+/* Add these styles to your existing CSS */
+.container4 .input-group-text {
+    font-size: 24px; /* Increase font size */
+    align-items: flex-end; /* Center horizontally */
+}
+
+.container4 .form-control {
+    font-size: 20px; /* Increase font size */
+    align-items: flex-end; /* Center horizontally */
+}
+
+.container4 .form-control_name {
+    font-size: 20px; /* Increase font size */
+    align-items: flex-end; /* Center horizontally */
+    margin-left: 56px;
+}
+
+.container4 .form-control_category {
+    font-size: 20px; /* Increase font size */
+    align-items: flex-end; /* Center horizontally */
+    margin-left: 24px;
+}
+
+.container4 .form-control_ingredients {
+    font-size: 20px; /* Increase font size */
+    align-items: flex-end; /* Center horizontally */
+    margin-left: 8px;
+}
+
+.container4 label {
+    font-size: 24px; /* Increase font size */
+    font-weight: bold; /* Make the labels bold */
+    margin-top: 20px; /* Add margin on top */
+    margin-bottom: 20px; /* Add margin on bottom */
+    margin-left: 80px;
+    align-items: flex-end; /* Center horizontally */
+}
+
+.container4 h2 {
+    margin-bottom: 30px;
+    margin-left: 24px;
+    text-align: center;
+    font-size: 50px; /* Adjust the font size as needed */
+    color: #ffffff; /* Black text color */
+}
+
+/* Style for the input fields */
+.container4 [type="number"],
+.container4 [type="radio"] {
+    padding: 15px; /* Increase padding */
+    margin-bottom: 20px; /* Add margin on bottom */
+    font-size: 20px; /* Increase font size */
 }
 
 .container3 {
@@ -238,4 +338,50 @@ a:hover {
     flex-direction: column; /* Stack buttons vertically */
     align-items: center;
     gap: 10px; /* Adjust the space between buttons */
+}
+
+select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    appearance: none; /* Removes default styles */
+    margin-bottom: 20px; /* Adds space below the select */
+    margin-top: 20px
+}
+
+/* Style for the label */
+label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Style for the options */
+select option {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+}
+
+.container2 label {
+    font-size: 24px; /* Increase font size */
+    font-weight: bold; /* Make the labels bold */
+    margin-top: 20px; /* Add margin on top */
+    margin-bottom: 20px; /* Add margin on bottom */
+}
+
+/* Style for the input fields */
+.container2 [type="number"],
+.container2 [type="radio"] {
+    padding: 15px; /* Increase padding */
+    margin-bottom: 20px; /* Add margin on bottom */
+    font-size: 20px; /* Increase font size */
+}
+
+/* Hover effect for options */
+select option:hover {
+    background-color: #f0f0f0;
 }

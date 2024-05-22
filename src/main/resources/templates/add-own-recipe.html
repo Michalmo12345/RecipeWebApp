@@ -3,33 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Recipe</title>
-<!--    <link rel="stylesheet" href="/css/style.css"> &lt;!&ndash; Link to your CSS file for styling &ndash;&gt;-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/style.css"> <!-- Include the CSS file -->
 </head>
 <body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <div>
+    <a href="/?continue"><img src="../images/home.jpg" alt="Home" class="home-icon"></a>
+</div>
+<div class="container4">
     <h2>Add a New Recipe</h2>
     <div class="input-group input-group-default mb-3">
-        <span class="input-group-text">Name</span>
-        <input type="text" id="name" class="form-control" required>
+        <span class="input-group-text">Name: </span>
+        <input type="text" id="name" class="form-control_name" required>
     </div>
+
     <div class="input-group input-group-default mb-3">
-        <span class="input-group-text">Category</span>
-        <input type="text" id="category" class="form-control" required>
+        <span class="input-group-text">Category: </span>
+        <input type="text" id="category" class="form-control_category" required>
     </div>
 
     <div class="input-group">
-        <span class="input-group-text">Instructions</span>
+        <span class="input-group-text">Instructions: </span>
         <textarea id="instructions" class="form-control"></textarea>
     </div>
 
     <div class="input-group mb-3">
-        <span class="input-group-text">Time</span>
-        <span class="input-group-text">minutes</span>
-        <input type="text" id="time" class="form-control">
+        <span class="input-group-text">Time (mins):</span>
+        <input type="number" id="time" class="form-control" min="0">
     </div>
+
+    <div class="input-group">
+        <span class="input-group-text">Ingredients: </span>
+        <textarea id="ingredients" class="form-control_ingredients"></textarea>
+    </div>
+
+    <div>
         <button id="recipeSubmit">Add recipe</button>
+    </div>
+
     <div>
         <form th:action="@{/add-own-recipe}" th:method="post" id="recipeForm">
             <input type="hidden" id="recipe" name="recipe">
@@ -37,32 +47,51 @@
     </div>
 
     <div>
-        <a href="/user/profile">
-            <button style="position: fixed; top: 10px; right: 10px;">User profile</button>
-        </a>
+        <a href="/user/profile"><img src="../images/user.png" alt="User" class="user-icon"> </a>
     </div>
-</div>
-<div>
-    <a href="/">Back to Home</a>
 </div>
 <script>
     function formatRecipeData(event) {
-        var name = document.getElementById('name').value;
-        var category = document.getElementById('category').value;
-        var instructions = document.getElementById('instructions').value;
-        var time = document.getElementById('time').value;
-        if(name !== "" || category!=="" || instructions!=="" || time!=="") {
-            var formattedData = name + ',' + category + ',' + instructions + ',' + time;
+        event.preventDefault(); // Prevent the default form submission
 
-            document.getElementById('recipe').value = formattedData;
+        var name = document.getElementById('name').value.trim();
+        var category = document.getElementById('category').value.trim();
+        var instructions = document.getElementById('instructions').value.trim();
+        var time = document.getElementById('time').value.trim();
+        var ingredients = document.getElementById('ingredients').value.trim();
 
-            document.getElementById('recipeForm').submit();
+        // Check if all fields are filled
+        if (name === "" || category === "" || instructions === "" || time === "" || ingredients === "") {
+            alert("You have to fill all fields before submitting.");
+            return; // Exit the function if validation fails
         }
 
+        // Split ingredients by line
+        var lines = ingredients.split('\n');
+        for (var i = 0; i < lines.length; i++) {
+            var ingredient = lines[i].trim();
+            // Adjusted regex to accommodate various characters in ingredient names
+            var ingredientsRegex = /^[\w\sąęćłńóśźżĄĘĆŁŃÓŚŹŻ,.-]+\s*,\s*\d+(\.\d+)?$/; // Name, Quantity
+            if (!ingredientsRegex.test(ingredient)) {
+                alert("Ingredients have to be added as such: IngredientName, IngredientQuantity. Each ingredient in new line");
+                return; // Exit the function if ingredients format is incorrect
+            }
+        }
+
+        // Format the ingredients
+        var formattedIngredients = lines.map(function(line) {
+            var parts = line.split(',').map(part => part.trim());
+            return parts.join('!');
+        }).join('#');
+
+        var formattedData = name + ';' + category + ';' + instructions + ';' + time + ';' + formattedIngredients;
+
+        document.getElementById('recipe').value = formattedData;
+
+        document.getElementById('recipeForm').submit();
     }
 
     document.getElementById("recipeSubmit").addEventListener("click", formatRecipeData);
-
 </script>
 </body>
 </html>
