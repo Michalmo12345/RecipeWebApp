@@ -26,6 +26,10 @@ public class Recipe {
     public void setCreator(User user){
         this.user = user;
     }
+
+    public User getUser(){
+        return user;
+    }
     public Recipe(String name, String category, String instructions, int time, List<Ingredient> ingredients) {
         this.name = name;
         this.category = category;
