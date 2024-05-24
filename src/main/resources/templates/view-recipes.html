@@ -26,7 +26,7 @@
             padding: 0 18px;
             display: none;
             overflow: hidden;
-            background-color: #333; /* Dark grey background for the container */
+            background-color: #ffffff; /* Dark grey background for the container */
             color: #000000; /* White text inside the container */
             margin-top: 5px; /* Space between button and content */
             border-radius: 5px; /* Optional: Add some border radius */
@@ -55,7 +55,11 @@
             <!-- Loop through the recipes list -->
             <tr th:each="recipe : ${recipes}">
                 <td th:text="${recipe.getName()}">Recipe Name</td>
-                <td><a th:href="${recipe.getInstructions()}" target="_blank">Recipe description</a></td>
+                <td>
+                    <a th:if="${recipe.getInstructions().startsWith('http')}" th:href="${recipe.getInstructions()}" target="_blank">Instructions</a>
+                    <button th:if="${not recipe.getInstructions().startsWith('http')}" class="collapsible">Show Description</button>
+                    <div th:if="${not recipe.getInstructions().startsWith('http')}" class="content" th:text="${recipe.getInstructions()}"></div>
+                </td>
                 <td>
                     <button class="collapsible">Show Ingredients</button>
                     <div class="content">
