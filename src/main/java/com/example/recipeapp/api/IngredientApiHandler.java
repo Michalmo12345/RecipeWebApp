@@ -23,15 +23,11 @@ public class IngredientApiHandler extends ApiHandler {
     private final String userId = getUserId("ingredient");
     private final String apiKey = getApiKey("ingredient");
     private final String baseUrl = "https://api.edamam.com/api/food-database/v2/parser?app_id=%s&app_key=%s&ingr=%s&nutrition-type=cooking";
+
     public String getIngredientMacros(String query, Double weight) {
 //        quantity in grams
-//        returns a string of macros in the format: "protein,calories,fat,carbs,fiber"
-        String urlString = String.format(baseUrl, userId, apiKey, query);
-        for (char c : query.toCharArray()) {
-            if (c == ' ') {
-                urlString = urlString.replace(" ", "%20");
-            }
-        }
+//        returns a string of macros in the format: "calories, proteins, fat, carbs, fiber"
+        String urlString = String.format(baseUrl, userId, apiKey, query).replace(" ", "%20");
         try {
             URL url = new URL(urlString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -44,37 +40,50 @@ public class IngredientApiHandler extends ApiHandler {
             }
             reader.close();
             connection.disconnect();
+
             JSONObject responseObj = (JSONObject) parser.parse(response.toString());
             JSONArray parsed = (JSONArray) responseObj.get("parsed");
             if (parsed.isEmpty()) {
-                throw new RuntimeException("No ingredients found");
+                return "No data for that ingredient";
             }
+
             JSONObject ingredient = (JSONObject) parsed.get(0);
             JSONObject food = (JSONObject) ingredient.get("food");
-            String macros = "";
+            StringBuilder macros = new StringBuilder();
             if (food.containsKey("nutrients")) {
                 JSONObject nutrients = (JSONObject) food.get("nutrients");
-                for (Object key : nutrients.keySet()) {
-                    macros += (Double) nutrients.get(key) * weight / 100 + ",";
-                }
+                double calories = (double) nutrients.get("ENERC_KCAL") * weight / 100;
+                double proteins = (double) nutrients.get("PROCNT") * weight / 100;
+                double fat = (double) nutrients.get("FAT") * weight / 100;
+                double carbs = (double) nutrients.get("CHOCDF") * weight / 100;
+                double fiber = (double) nutrients.get("FIBTG") * weight / 100;
+
+                calories = Math.round(calories * 100.0) / 100.0;
+                proteins = Math.round(proteins * 100.0) / 100.0;
+                fat = Math.round(fat * 100.0) / 100.0;
+                carbs = Math.round(carbs * 100.0) / 100.0;
+                fiber = Math.round(fiber * 100.0) / 100.0;
+
+                macros.append("Calories: ").append(calories).append(" kcal, ");
+                macros.append("Proteins: ").append(proteins).append(" g, ");
+                macros.append("Fat: ").append(fat).append(" g, ");
+                macros.append("Carbs: ").append(carbs).append(" g, ");
+                macros.append("Fiber: ").append(fiber).append(" g");
+            } else {
+                return "No data for that ingredient";
             }
-            else {
-                throw new RuntimeException("No nutrients found");
-            }
-            return macros;
-        }
-        catch (ProtocolException e) {
-            throw new RuntimeException("Invalid request method");
+
+            return macros.toString();
+        } catch (ProtocolException e) {
+            return "No data for that ingredient";
         } catch (MalformedURLException e) {
-            throw new RuntimeException("Invalid URL");
+            return "No data for that ingredient";
         } catch (IOException e) {
-            throw new RuntimeException("Error connecting to API");
+            return "No data for that ingredient";
         } catch (ParseException e) {
-            throw new RuntimeException("Error parsing response");
+            return "No data for that ingredient";
+        } catch (RuntimeException e) {
+            return e.getMessage();
         }
     }
-//    public static void main(String[] args) {
-//        IngredientApiHandler ingredientApiHandler = new IngredientApiHandler();
-//        System.out.println(ingredientApiHandler.getIngredientMacros("butter", 100.0));
-//    }
 }

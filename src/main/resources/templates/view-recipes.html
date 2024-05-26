@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>View Recipes</title>
-    <link rel="stylesheet" href="/css/style.css"> <!-- Link to your CSS file for styling -->
+    <link rel="stylesheet" href="/css/style.css">
     <style>
         .collapsible {
             background-color: #777;
             color: white;
             cursor: pointer;
-            padding: 5px 10px; /* Reduced padding for a smaller button */
-            width: auto; /* Auto width to fit the content */
+            padding: 5px 10px;
+            width: auto;
             border: none;
             text-align: left;
             outline: none;
-            font-size: 12px; /* Smaller font size */
-            border-radius: 5px; /* Optional: Add some border radius */
+            font-size: 12px;
+            border-radius: 5px;
         }
 
         .active, .collapsible:hover {
@@ -26,12 +26,11 @@
             padding: 0 18px;
             display: none;
             overflow: hidden;
-            background-color: #ffffff; /* Dark grey background for the container */
-            color: #000000; /* White text inside the container */
-            margin-top: 5px; /* Space between button and content */
-            border-radius: 5px; /* Optional: Add some border radius */
+            background-color: #ffffff;
+            color: #000000;
+            margin-top: 5px;
+            border-radius: 5px;
         }
-
     </style>
 </head>
 <body>
@@ -39,7 +38,6 @@
     <a href="/?continue"><img src="../images/home.jpg" alt="Home" class="home-icon"></a>
 </div>
 <div class="container2">
-    <!-- Check if the recipes list is not empty -->
     <div th:if="${not #lists.isEmpty(recipes)}">
         <h2>Available Recipes</h2>
         <table>
@@ -52,7 +50,6 @@
             </tr>
             </thead>
             <tbody>
-            <!-- Loop through the recipes list -->
             <tr th:each="recipe : ${recipes}">
                 <td th:text="${recipe.getName()}">Recipe Name</td>
                 <td>
@@ -64,7 +61,9 @@
                     <button class="collapsible">Show Ingredients</button>
                     <div class="content">
                         <ul>
-                            <li th:each="ingredient : ${recipe.getIngredients()}" class="ingredient" th:text="${ingredient}">Ingredient</li>
+                            <li th:each="ingredient : ${recipe.getIngredients()}" class="ingredient">
+                                <span th:text="${ingredient.getName() + ', ' + ingredient.getWeight() + ' g, ' + ingredient.getMacros()}"></span>
+                            </li>
                         </ul>
                     </div>
                 </td>
@@ -84,7 +83,6 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Collapsible functionality
         var coll = document.getElementsByClassName("collapsible");
         for (var i = 0; i < coll.length; i++) {
             coll[i].addEventListener("click", function () {
@@ -97,20 +95,6 @@
                 }
             });
         }
-
-        // Format ingredients
-        function formatIngredient(ingredient) {
-            var ingredientData = ingredient.split("!");
-            var ingredientString = ingredientData[0] + ", " + ingredientData[1] + "g";
-            return ingredientString;
-        }
-
-        var ingredients = document.querySelectorAll(".ingredient");
-        ingredients.forEach(function(ingredientElement) {
-            var originalText = ingredientElement.textContent;
-            var formattedText = formatIngredient(originalText);
-            ingredientElement.textContent = formattedText;
-        });
     });
 </script>
 </body>

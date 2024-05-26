@@ -1,6 +1,7 @@
 package com.example.recipeapp.controlers;
 
 
+import com.example.recipeapp.api.IngredientApiHandler;
 import com.example.recipeapp.api.RecipeApiHandler;
 import com.example.recipeapp.export.CsvExporter;
 import com.example.recipeapp.models.Ingredient;
@@ -26,11 +27,13 @@ public class RecipeController {
     private RecipeService recipeService;
     private UserService userService;
     private final RecipeApiHandler recipeApiHandler;
+    private final IngredientApiHandler ingredientApiHandler;
 
     public RecipeController(RecipeService recipeService, UserService userService) {
         this.recipeService = recipeService;
         this.userService = userService;
         this.recipeApiHandler = new RecipeApiHandler();
+        this.ingredientApiHandler = new IngredientApiHandler();
     }
 
     @GetMapping("/")
@@ -45,6 +48,17 @@ public class RecipeController {
 
         String username = SecurityUtil.getSessionUser();
         List<Recipe> recipes = recipeService.findAllUserRecipes(username);
+        for (Recipe recipe : recipes) {
+            for (Ingredient ingredient : recipe.getIngredients()) {
+                try {
+                    String macros = ingredientApiHandler.getIngredientMacros(ingredient.getName(), ingredient.getWeight());
+                    ingredient.setMacros(macros);
+                } catch (Exception e) {
+                    ingredient.setMacros("No data for that ingredient");
+                }
+            }
+        }
+
         model.addAttribute("recipes", recipes);
         return "view-recipes";
     }
@@ -131,5 +145,10 @@ public class RecipeController {
                 headers.add(HttpHeaders.CONTENT_TYPE, "text/csv");
                 return ResponseEntity.ok().headers(headers).body(csvData);
         }
+    }
+    @GetMapping("/api/getMacros")
+    public ResponseEntity<?> getMacros(@RequestParam String ingredientName, @RequestParam double weight) {
+        String macros = ingredientApiHandler.getIngredientMacros(ingredientName, weight);
+        return ResponseEntity.ok(macros);
     }
 }

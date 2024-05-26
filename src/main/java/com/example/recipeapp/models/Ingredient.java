@@ -14,6 +14,7 @@ public class Ingredient {
     public Integer id;
     private String name;
     private Double weight;
+    private String macros;
 
 
 
@@ -57,5 +58,11 @@ public class Ingredient {
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+    public String getMacros() {
+        return macros;
+    }
+    public void setMacros(String macros) {
+        this.macros = macros;
     }
 }
