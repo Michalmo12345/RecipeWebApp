@@ -42,11 +42,11 @@ public class AuthController {
     public String register(@Valid @ModelAttribute("user") RegistrationDto user,
                            BindingResult result, Model model) {
         User existingUserEmail = userService.findByEmail(user.getEmail());
-        if (existingUserEmail != null) {
+        if(existingUserEmail != null && existingUserEmail.getEmail() != null && !existingUserEmail.getEmail().isEmpty()) {
             result.rejectValue("email", "error.user", "There is already a user with this email");
         }
         User existingUsername = userService.findByUsername(user.getUsername());
-        if (existingUsername != null) {
+        if(existingUsername != null && existingUsername.getUsername() != null && !existingUsername.getUsername().isEmpty()) {
             result.rejectValue("username", "error.user", "There is already a user with this username");
         }
         if (result.hasErrors()) {
