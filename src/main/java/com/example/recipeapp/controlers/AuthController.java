@@ -39,21 +39,20 @@ public class AuthController {
     }
 
     @PostMapping("/register/save")
-    public String register(@Valid @ModelAttribute("user")RegistrationDto user,
-                           BindingResult result, Model model){
+    public String register(@Valid @ModelAttribute("user") RegistrationDto user,
+                           BindingResult result, Model model) {
         User existingUserEmail = userService.findByEmail(user.getEmail());
-        if(existingUserEmail != null && existingUserEmail.getEmail() != null && !existingUserEmail.getEmail().isEmpty()){
-            result.rejectValue("email", "There is already a user with this email/username");
+        if (existingUserEmail != null) {
+            result.rejectValue("email", "error.user", "There is already a user with this email");
         }
         User existingUsername = userService.findByUsername(user.getUsername());
-        if(existingUsername != null && existingUsername.getUsername() != null && !existingUsername.getUsername().isEmpty()){
-            result.rejectValue("username", "There is already a user with this email/username");
+        if (existingUsername != null) {
+            result.rejectValue("username", "error.user", "There is already a user with this username");
         }
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             model.addAttribute("user", user);
-            return "register";
+            return "register"; // Make sure this view name matches your Thymeleaf template name
         }
-        log.info("Attempt to save user: " + user.getUsername() + " with email: " + user.getEmail() + " and password: " + user.getPassword());
         userService.saveUser(user);
         return "redirect:/";
     }

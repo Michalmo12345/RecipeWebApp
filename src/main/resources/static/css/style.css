@@ -380,7 +380,11 @@ select option {
     margin-bottom: 20px; /* Add margin on bottom */
     font-size: 20px; /* Increase font size */
 }
-
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
 /* Hover effect for options */
 select option:hover {
     background-color: #f0f0f0;
