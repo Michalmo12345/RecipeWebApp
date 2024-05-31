@@ -1,37 +1,36 @@
-## Gotuj z KLASĄ ;)
+## Cook with Class/Gotuj z KLASĄ ;)
 
-### Dokumentacja wstępna projektu - PAP2024L-Z16
+### Project - PAP2024L-Z16
 
-### Autorzy:
+### Authors:
 - Michał Mokrzycki
 - Adam Sokołowski
 - Jan Szymczak
-### Wstępny opis
-Projekt zakłada utworzenie aplikacji webowej wspomagającej zarządzaniem gotowania i liczenia kalori przy użycie biblioteki Spring i Javy jako głównego języka programowania. 
-Przednia warstwa strony zostanie najprawdopodobniej wykonana przy użyciu HTML i CSS.
-#### Główne funkcje
 
-- możliwość importowania gotowych przepisów z API (dokładne API z jakiego będzie korzystał projekt do ustalenia) i zapisywanie ich do bazy danych
-- możliwość tworzenia potrawy z API produktów i dodawanie jej do bazy danych
-- dodawanie potraw/produktów do porównania i sortowanie po ilości kalorii i innych składników odżywczych
-- dodawanie przepisów do ulubionych i możliwość ich wyeksportowania 
-- kalkulator dziennego zapotrzebowania kalorii  
-- ustawianie dziennego celu kalorii oraz składników makro i sprawdzanie osiągnięcia celu
-- (opcjonalnie) obliczanie kosztów produktów, ceny samodzielnie dodane do bazy danych w przypadku niemożliwości znalezienia odpowiedniego API
+### Instructions
 
-#### Środowisko
-Do stworzenia aplikacji zostanie wykorzystany IntelliJ Idea Ultimate oraz Spring Boot Initializer.
+To be able to use API you need to insers following APIKey.json file in the root directory of the project.
+With format:
+```json
+{
+"recipeApiKey": "",
+"recipeApiID": "",
+"ingredientApiKey": "",
+"ingredientApiID": ""
+}
+```
+And put your API keys in the fields. You can get the API keys by logging into the Edamam API website(link below).
+You also need to setup the database connection in the application.properties file in the resources directory.
+We recommend using PostgreSQL database. We recommend creating .env file in project root for this.
+```properties
+DB_PASSWORD=
+DB_URL=
+DB_USER=
+```
+App is easy to use and doesn't require any additional setup. Just run the app and enjoy the recipes.
+Website is available at localhost:8080 and is planned to be improved in the future.
 
-#### Zadania 
-
-- zaprojektowanie ogólnej struktury i architektury projektu
-- utworzenie graficznego interfejsu użytkownika
-- utworzenie i zarządzanie lokalną bazą danych 
-- implementacji logiki backend
-- komunikacja backend-frontend
-- pobieranie danych z API
-
-#### Linki
+#### Links
 
 - https://developer.edamam.com/
 
